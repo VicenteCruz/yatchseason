@@ -70,13 +70,20 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Active section
-    let currentSection = '';
+    let currentSection = 'hero';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
       if (scrollY >= sectionTop && scrollY < sectionTop + section.offsetHeight) {
         currentSection = section.getAttribute('id');
       }
     });
+
+    // Update body class for cursor shape
+    const sectionClasses = Array.from(sections).map(s => 'section-' + s.getAttribute('id'));
+    document.body.classList.remove(...sectionClasses, 'section-hero'); // Ensure section-hero is removed too in case it's not in sections array
+    if (currentSection) {
+      document.body.classList.add('section-' + currentSection);
+    }
 
     navLinks.forEach(link => {
       link.classList.remove('active');
@@ -156,27 +163,28 @@ document.addEventListener('DOMContentLoaded', () => {
       const scrollY = window.scrollY;
       const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : window.innerHeight;
       const isScrollingDown = scrollY > lastScrollY;
+      const isScrollingUp = scrollY < lastScrollY;
 
-      // Show after scrolling past hero
-      if (scrollY > heroBottom * 0.7 && isScrollingDown && !ctaVisible) {
+      // Only show when scrolling UP and past the hero section
+      if (scrollY > heroBottom && isScrollingUp) {
         mobileCta.classList.add('visible');
-        ctaVisible = true;
-      }
-
-      // Hide when back at top
-      if (scrollY < heroBottom * 0.3 && ctaVisible) {
+      } 
+      // Hide when scrolling DOWN
+      else if (isScrollingDown) {
         mobileCta.classList.remove('visible');
-        ctaVisible = false;
       }
 
-      // Hide near pricing section (already there)
+      // Always hide if we are back at the top
+      if (scrollY < heroBottom * 0.5) {
+        mobileCta.classList.remove('visible');
+      }
+
+      // Always hide if we reach the pricing section (redundant)
       const precosSection = document.getElementById('precos');
       if (precosSection) {
         const precosTop = precosSection.getBoundingClientRect().top;
-        if (precosTop < window.innerHeight * 0.5) {
+        if (precosTop < window.innerHeight * 0.7) {
           mobileCta.classList.remove('visible');
-        } else if (scrollY > heroBottom * 0.7) {
-          mobileCta.classList.add('visible');
         }
       }
 
@@ -268,9 +276,9 @@ document.addEventListener('DOMContentLoaded', () => {
     tiltElements.forEach(el => {
       el.addEventListener('mousemove', (e) => {
         const rect = el.getBoundingClientRect();
-        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -4;
-        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 4;
-        el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
+        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -1.5;
+        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 1.5;
+        el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
       });
       el.addEventListener('mouseleave', () => {
         el.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
@@ -284,8 +292,8 @@ document.addEventListener('DOMContentLoaded', () => {
     tiltGallery.forEach(el => {
       el.addEventListener('mousemove', (e) => {
         const rect = el.getBoundingClientRect();
-        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -3;
-        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 3;
+        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -1.2;
+        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 1.2;
         el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
       el.addEventListener('mouseleave', () => {
@@ -305,7 +313,7 @@ document.addEventListener('DOMContentLoaded', () => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
+        btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
       });
       btn.addEventListener('mouseleave', () => {
         btn.style.transform = 'translate(0, 0)';
@@ -595,8 +603,72 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================
+  // FAQ ACCORDION
+  // ========================================
+  const faqItems = document.querySelectorAll('.faq-item');
+  
+  faqItems.forEach(item => {
+    const question = item.querySelector('.faq-question');
+    question.addEventListener('click', () => {
+      const isActive = item.classList.contains('active');
+      
+      // Close all other items
+      faqItems.forEach(otherItem => {
+        otherItem.classList.remove('active');
+      });
+      
+      // Toggle current item
+      if (!isActive) {
+        item.classList.add('active');
+      }
+    });
+  });
+
+  // ========================================
   // INITIAL STATE
   // ========================================
   updateNavbar();
+
+  // ========================================
+  // FLOATING COUNTDOWN
+  // ========================================
+  const countdownTimer = document.getElementById('countdownTimer');
+  const floatingCountdown = document.getElementById('floatingCountdown');
+
+  if (countdownTimer && floatingCountdown) {
+    // Target date: June 10 of next year
+    const currentYear = new Date().getFullYear();
+    const targetDate = new Date(`June 10, ${currentYear + 1} 00:00:00`).getTime();
+
+    // Show after a small delay
+    setTimeout(() => {
+      floatingCountdown.classList.add('visible');
+      
+      // Collapse after 4 seconds
+      setTimeout(() => {
+        floatingCountdown.classList.add('collapsed');
+      }, 4000);
+    }, 1500);
+
+    const updateCountdown = () => {
+      const now = new Date().getTime();
+      const distance = targetDate - now;
+
+      if (distance < 0) {
+        countdownTimer.innerHTML = "A ÉPOCA COMEÇOU!";
+        return;
+      }
+
+      const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+      countdownTimer.innerHTML = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+    };
+
+    updateCountdown();
+    setInterval(updateCountdown, 1000);
+  }
 
 });

@@ -61,7 +61,7 @@
   <!-- ============ HERO ============ -->
   <section class="hero" id="hero">
     <div class="hero-bg">
-      <img src="img/hero_bg.jpg" alt="Catamarã nas águas cristalinas da Grécia" id="heroBgImg">
+      <img src="img/hero_bg_fresh.png" alt="Catamarã nas águas cristalinas da Grécia" id="heroBgImg">
     </div>
     <div class="hero-overlay"></div>
 
@@ -212,7 +212,7 @@
   </section>
 
   <!-- Wave Divider -->
-  <div class="wave-divider">
+  <div class="wave-divider" style="background-color: var(--color-bg-alt)">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
       <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,20 1440,40 L1440,80 L0,80 Z" fill="#FAFAF8"/>
     </svg>
@@ -268,9 +268,9 @@
   </section>
 
   <!-- Wave Divider Inverted -->
-  <div class="wave-divider wave-divider-flip">
+  <div class="wave-divider wave-divider-flip" style="background-color: var(--color-bg-alt)">
     <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
-      <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,80 L0,80 Z" fill="#F2F1EC"/>
+      <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,80 L0,80 Z" fill="#FAFAF8"/>
     </svg>
   </div>
 
@@ -497,25 +497,84 @@
       </div>
     </div>
   </section>
+  <!-- Wave Divider -->
+  <div class="wave-divider wave-divider-flip">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,80 L0,80 Z" fill="#F2F1EC"/>
+    </svg>
+  </div>
+
+  <!-- ============ REVIEWS (SOCIAL PROOF) ============ -->
+  <section id="reviews">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">O que dizem de nós</span>
+        <h2>Aventura Comprovada</h2>
+      </div>
+      <div class="reviews-grid">
+        <div class="review-card reveal" data-tilt>
+          <div class="stars">★★★★★</div>
+          <p>"A melhor semana da minha vida! As baías secretas e os jantares a bordo foram inesquecíveis. Recomendo 100%!"</p>
+          <div class="reviewer">
+            <div class="avatar">M</div>
+            <div class="info">
+              <strong>Marta Silva</strong>
+              <span>Agosto 2025</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal" data-tilt>
+          <div class="stars">★★★★★</div>
+          <p>"Uma experiência que mudou as minhas férias. A equipa é incrível e o barco estava sempre impecável."</p>
+          <div class="reviewer">
+            <div class="avatar">J</div>
+            <div class="info">
+              <strong>João Pedro</strong>
+              <span>Julho 2025</span>
+            </div>
+          </div>
+        </div>
+        <div class="review-card reveal" data-tilt>
+          <div class="stars">★★★★★</div>
+          <p>"O equilíbrio perfeito entre relaxar no mar e festa na ilha. Conheci pessoas fantásticas!"</p>
+          <div class="reviewer">
+            <div class="avatar">S</div>
+            <div class="info">
+              <strong>Sofia Costa</strong>
+              <span>Setembro 2025</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,20 C240,60 480,0 720,40 C960,80 1200,10 1440,40 L1440,80 L0,80 Z" fill="#F2F1EC"/>
+    </svg>
+  </div>
 
   <!-- ============ PREÇOS ============ -->
-  <section id="precos">
+  <section id="precos" class="section-bg-alt">
     <div class="container">
       <div class="section-header reveal">
         <span class="section-label">Pacotes</span>
         <h2>Preços</h2>
         <p>Escolhe o pacote que melhor se adapta a ti.</p>
       </div>
-      <div class="pricing-grid">
-        <!-- Essential -->
-        <div class="pricing-card reveal" data-tilt>
-          <div class="plan-name">Essential</div>
-          <div class="plan-price">€799<span>/pp</span></div>
+      <div class="pricing-single reveal" data-tilt>
+        <!-- Single Package -->
+        <div class="pricing-card featured" style="max-width: 500px; margin: 0 auto;">
+          <span class="pricing-badge">Experiência Completa</span>
+          <div class="plan-name">The Yacht Season</div>
+          <div class="plan-price">€1000<span>/pp</span></div>
           <div class="plan-period">por pessoa · 7 noites</div>
           <ul class="plan-features">
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Lugar no catamarã (cabine partilhada)
+              Lugar no catamarã
             </li>
             <li>
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
@@ -529,70 +588,67 @@
               <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
               Taxas de marina incluídas
             </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Pack fotografia & vídeo
+            </li>
           </ul>
-          <a href="#" class="btn btn-secondary magnetic">Escolher</a>
+          <a href="#" class="btn btn-primary magnetic">Reservar Agora</a>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <!-- Popular -->
-        <div class="pricing-card featured reveal" data-tilt>
-          <div class="pricing-glow"></div>
-          <span class="pricing-badge">Mais Popular</span>
-          <div class="plan-name">All-In</div>
-          <div class="plan-price">€1.099<span>/pp</span></div>
-          <div class="plan-period">por pessoa · 7 noites</div>
-          <ul class="plan-features">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Tudo do Essential
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Pequeno-almoço & almoço incluídos
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Bebidas a bordo
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Pack fotografia profissional
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Toalhas & roupa de cama premium
-            </li>
-          </ul>
-          <a href="#" class="btn btn-primary magnetic">Escolher</a>
+  <!-- Wave Divider -->
+  <div class="wave-divider wave-divider-flip">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,80 L0,80 Z" fill="#F2F1EC"/>
+    </svg>
+  </div>
+
+  <!-- ============ FAQ ============ -->
+  <section id="faq">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Dúvidas?</span>
+        <h2>Perguntas Frequentes</h2>
+      </div>
+      <div class="faq-accordion reveal">
+        <div class="faq-item">
+          <button class="faq-question">
+            Preciso de ter experiência a velejar?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Absolutamente nenhuma! Terás sempre a bordo um Skipper profissional certificado e um Host para tratar de tudo. Se quiseres aprender e participar nas manobras, o Skipper terá todo o gosto em ensinar-te, mas se preferires apenas relaxar ao sol, a escolha é 100% tua.</p>
+          </div>
         </div>
-
-        <!-- VIP -->
-        <div class="pricing-card reveal" data-tilt>
-          <div class="plan-name">VIP</div>
-          <div class="plan-price">€1.499<span>/pp</span></div>
-          <div class="plan-period">por pessoa · 7 noites</div>
-          <ul class="plan-features">
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Tudo do All-In
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Cabine privada
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Transfer aeroporto ↔ marina
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Jantares incluídos
-            </li>
-            <li>
-              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
-              Experiências exclusivas na ilha
-            </li>
-          </ul>
-          <a href="#" class="btn btn-secondary magnetic">Escolher</a>
+        <div class="faq-item">
+          <button class="faq-question">
+            Como funcionam as refeições a bordo?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Os pequenos-almoços e almoços leves são preparados pelo nosso Host com ingredientes locais frescos (incluído no pacote All-In). Para o jantar, atracamos sempre numa ilha diferente, o que te dá a liberdade fantástica de explorar as famosas tabernas gregas e provar a autêntica gastronomia local.</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            Vou enjoar no barco?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Os catamarãs são famosos pela sua enorme estabilidade devido aos dois cascos. Ao contrário dos veleiros tradicionais (monocascos), eles quase não inclinam. Navegamos principalmente de manhã quando o mar está mais calmo. Na maioria dos dias, vais esquecer-te que estás no mar!</p>
+          </div>
+        </div>
+        <div class="faq-item">
+          <button class="faq-question">
+            O que acontece se cancelar a reserva?
+            <span class="faq-icon">+</span>
+          </button>
+          <div class="faq-answer">
+            <p>Compreendemos que imprevistos acontecem. Podes cancelar com devolução de 100% até 60 dias antes da viagem. Podes também transferir a tua reserva para outra pessoa sem qualquer custo adicional em qualquer altura.</p>
+          </div>
         </div>
       </div>
     </div>
@@ -670,8 +726,17 @@
   <div class="mobile-cta" id="mobileCta">
     <a href="#precos" class="mobile-cta-btn">
       <span>Reservar Agora</span>
-      <span class="mobile-cta-price">desde €799</span>
+      <span class="mobile-cta-price">desde €1000</span>
     </a>
+  </div>
+
+  <!-- Floating Countdown Bubble -->
+  <div class="floating-countdown" id="floatingCountdown">
+    <div class="countdown-icon">⚓</div>
+    <div class="countdown-text">
+      <div class="countdown-title">Próxima Temporada</div>
+      <div class="countdown-timer" id="countdownTimer">A calcular...</div>
+    </div>
   </div>
 
   <script src="script.js"></script>
