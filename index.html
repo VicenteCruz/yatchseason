@@ -1,0 +1,662 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Yacht Season — Vive a aventura das ilhas gregas num catamarã. Velejar, mergulhar, explorar ilhas paradisíacas e viver a melhor experiência do Mediterrâneo.">
+  <meta property="og:title" content="Yacht Season — Grécia">
+  <meta property="og:description" content="Uma semana de aventura nas ilhas gregas. Catamarã, águas cristalinas, ilhas secretas e a melhor vida noturna.">
+  <meta property="og:type" content="website">
+  <title>Yacht Season — Grécia</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+
+  <!-- Custom Cursor -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav class="navbar" id="navbar">
+    <div class="container">
+      <a href="#hero" class="nav-logo">
+        <span class="logo-yacht">YACHT</span>
+        <span class="logo-season">SEASON</span>
+      </a>
+      <div class="nav-links">
+        <a href="#como-funciona">Como Funciona</a>
+        <a href="#galeria">Galeria</a>
+        <a href="#barcos">Barcos</a>
+        <a href="#destaques">Destaques</a>
+        <a href="#itinerario">Itinerário</a>
+        <a href="#precos">Preços</a>
+      </div>
+      <div class="nav-cta">
+        <a href="#precos" class="btn btn-primary magnetic">Reservar</a>
+      </div>
+      <button class="hamburger" id="hamburger" aria-label="Menu">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+  </nav>
+
+  <!-- Mobile Menu -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#como-funciona">Como Funciona</a>
+    <a href="#galeria">Galeria</a>
+    <a href="#barcos">Barcos</a>
+    <a href="#destaques">Destaques</a>
+    <a href="#itinerario">Itinerário</a>
+    <a href="#precos">Preços</a>
+    <a href="#precos" class="btn btn-primary" style="margin-top: 12px;">Reservar</a>
+  </div>
+
+  <!-- ============ HERO ============ -->
+  <section class="hero" id="hero">
+    <div class="hero-bg">
+      <img src="img/hero_bg.jpg" alt="Catamarã nas águas cristalinas da Grécia" id="heroBgImg">
+    </div>
+    <div class="hero-overlay"></div>
+
+    <!-- Floating Geometric Shapes -->
+    <div class="hero-shapes" id="heroShapes">
+      <div class="shape shape-circle" data-speed="0.03" style="top: 15%; left: 8%;"></div>
+      <div class="shape shape-ring" data-speed="0.05" style="top: 25%; right: 10%;"></div>
+      <div class="shape shape-dot" data-speed="0.02" style="top: 60%; left: 5%;"></div>
+      <div class="shape shape-cross" data-speed="0.04" style="top: 70%; right: 15%;"></div>
+      <div class="shape shape-line" data-speed="0.06" style="top: 20%; left: 25%;"></div>
+      <div class="shape shape-diamond" data-speed="0.03" style="top: 45%; right: 6%;"></div>
+      <div class="shape shape-circle-sm" data-speed="0.05" style="bottom: 20%; left: 15%;"></div>
+      <div class="shape shape-ring-sm" data-speed="0.04" style="bottom: 25%; right: 25%;"></div>
+    </div>
+
+    <div class="hero-content">
+      <span class="hero-label">Grécia · Verão 2026</span>
+      <h1 class="hero-title">
+        <span class="title-line"><span class="title-line-inner">UM DIA NA</span></span>
+        <span class="title-line highlight"><span class="title-line-inner">YACHT SEASON</span></span>
+      </h1>
+      <p class="hero-subtitle">
+        Acordas num catamarã. Mergulhas em águas cristalinas. Velejas entre ilhas paradisíacas. 
+        Vives o Après-Sea. Repetir.
+      </p>
+      <div class="hero-actions">
+        <a href="#precos" class="btn btn-primary magnetic">Ver Pacotes</a>
+        <a href="#como-funciona" class="btn btn-secondary magnetic">Como Funciona</a>
+      </div>
+    </div>
+    <div class="scroll-indicator">
+      <span>Scroll</span>
+      <div class="scroll-line"></div>
+    </div>
+  </section>
+
+  <!-- ============ MARQUEE TICKER ============ -->
+  <div class="marquee-section">
+    <div class="marquee-track">
+      <div class="marquee-content">
+        <span>SAIL</span><span class="marquee-dot">◆</span>
+        <span>DIVE</span><span class="marquee-dot">◆</span>
+        <span>EXPLORE</span><span class="marquee-dot">◆</span>
+        <span>PARTY</span><span class="marquee-dot">◆</span>
+        <span>REPEAT</span><span class="marquee-dot">◆</span>
+        <span>SAIL</span><span class="marquee-dot">◆</span>
+        <span>DIVE</span><span class="marquee-dot">◆</span>
+        <span>EXPLORE</span><span class="marquee-dot">◆</span>
+        <span>PARTY</span><span class="marquee-dot">◆</span>
+        <span>REPEAT</span><span class="marquee-dot">◆</span>
+      </div>
+      <div class="marquee-content" aria-hidden="true">
+        <span>SAIL</span><span class="marquee-dot">◆</span>
+        <span>DIVE</span><span class="marquee-dot">◆</span>
+        <span>EXPLORE</span><span class="marquee-dot">◆</span>
+        <span>PARTY</span><span class="marquee-dot">◆</span>
+        <span>REPEAT</span><span class="marquee-dot">◆</span>
+        <span>SAIL</span><span class="marquee-dot">◆</span>
+        <span>DIVE</span><span class="marquee-dot">◆</span>
+        <span>EXPLORE</span><span class="marquee-dot">◆</span>
+        <span>PARTY</span><span class="marquee-dot">◆</span>
+        <span>REPEAT</span><span class="marquee-dot">◆</span>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============ COMO FUNCIONA ============ -->
+  <section id="como-funciona" class="section-bg-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">A Experiência</span>
+        <h2>Como Funciona</h2>
+        <p>Três passos para a melhor semana da tua vida no Mediterrâneo.</p>
+      </div>
+      <div class="steps-grid">
+        <div class="step-card reveal" data-tilt>
+          <div class="step-number">01</div>
+          <div class="step-icon-wrapper">
+            <div class="step-icon-animated">
+              <!-- Sun SVG animated -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-sun">
+                <circle cx="40" cy="40" r="14" stroke="currentColor" stroke-width="2"/>
+                <line x1="40" y1="6" x2="40" y2="18" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="40" y1="62" x2="40" y2="74" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="6" y1="40" x2="18" y2="40" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="62" y1="40" x2="74" y2="40" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="16" y1="16" x2="24.5" y2="24.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="55.5" y1="55.5" x2="64" y2="64" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="16" y1="64" x2="24.5" y2="55.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+                <line x1="55.5" y1="24.5" x2="64" y2="16" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="sun-ray"/>
+              </svg>
+            </div>
+          </div>
+          <h3>Acorda no Paraíso</h3>
+          <p>Começa o dia com o nascer do sol sobre o mar Egeu. Pequeno-almoço no deck com vista infinita.</p>
+        </div>
+
+        <!-- Animated connecting line -->
+        <div class="step-connector reveal">
+          <svg viewBox="0 0 120 4" preserveAspectRatio="none">
+            <line x1="0" y1="2" x2="120" y2="2" stroke="#bada55" stroke-width="2" stroke-dasharray="6,6" class="connector-line"/>
+          </svg>
+        </div>
+
+        <div class="step-card reveal" data-tilt>
+          <div class="step-number">02</div>
+          <div class="step-icon-wrapper">
+            <div class="step-icon-animated">
+              <!-- Wave SVG animated -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-wave">
+                <path d="M8 45 C18 35, 28 55, 40 45 C52 35, 62 55, 72 45" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" class="wave-path"/>
+                <path d="M8 55 C18 45, 28 65, 40 55 C52 45, 62 65, 72 55" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" class="wave-path" style="animation-delay: 0.3s"/>
+                <circle cx="40" cy="28" r="3" fill="currentColor" class="wave-dot"/>
+                <path d="M32 20 L40 10 L48 20" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none"/>
+              </svg>
+            </div>
+          </div>
+          <h3>Vive a Aventura</h3>
+          <p>Velejar, mergulhar, SUP, festas a bordo. Cada dia é uma nova ilha, uma nova história.</p>
+        </div>
+
+        <!-- Animated connecting line -->
+        <div class="step-connector reveal">
+          <svg viewBox="0 0 120 4" preserveAspectRatio="none">
+            <line x1="0" y1="2" x2="120" y2="2" stroke="#bada55" stroke-width="2" stroke-dasharray="6,6" class="connector-line"/>
+          </svg>
+        </div>
+
+        <div class="step-card reveal" data-tilt>
+          <div class="step-number">03</div>
+          <div class="step-icon-wrapper">
+            <div class="step-icon-animated">
+              <!-- Stars/Party SVG animated -->
+              <svg viewBox="0 0 80 80" fill="none" xmlns="http://www.w3.org/2000/svg" class="icon-stars">
+                <circle cx="40" cy="50" r="12" stroke="currentColor" stroke-width="2" class="star-circle"/>
+                <path d="M40 18 L42 28 L52 28 L44 34 L46 44 L40 38 L34 44 L36 34 L28 28 L38 28 Z" stroke="currentColor" stroke-width="1.5" fill="none" class="star-path"/>
+                <circle cx="22" cy="22" r="2" fill="currentColor" class="twinkle"/>
+                <circle cx="60" cy="18" r="1.5" fill="currentColor" class="twinkle" style="animation-delay: 0.5s"/>
+                <circle cx="58" cy="42" r="1" fill="currentColor" class="twinkle" style="animation-delay: 1s"/>
+              </svg>
+            </div>
+          </div>
+          <h3>Après-Sea</h3>
+          <p>A vida noturna das ilhas gregas. Bares, restaurantes típicos e a melhor energia do Mediterrâneo.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,80 720,0 1080,40 C1260,60 1380,20 1440,40 L1440,80 L0,80 Z" fill="#FAFAF8"/>
+    </svg>
+  </div>
+
+  <!-- ============ GALERIA ============ -->
+  <section id="galeria">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Momentos</span>
+        <h2>Galeria</h2>
+        <p>Um vislumbre do que te espera nas ilhas gregas.</p>
+      </div>
+      <div class="gallery-grid">
+        <div class="gallery-item reveal-scale" data-index="0" data-tilt-gallery>
+          <img src="img/gallery_1.jpg" alt="Mergulho nas águas cristalinas" loading="lazy">
+          <div class="gallery-caption">
+            <span>Mergulho</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-index="1" data-tilt-gallery>
+          <img src="img/gallery_2.jpg" alt="Stand Up Paddle" loading="lazy">
+          <div class="gallery-caption">
+            <span>SUP</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-index="2" data-tilt-gallery>
+          <img src="img/gallery_3.jpg" alt="Almoço no catamarã" loading="lazy">
+          <div class="gallery-caption">
+            <span>Almoço</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-index="3" data-tilt-gallery>
+          <img src="img/gallery_4.jpg" alt="Baía secreta grega" loading="lazy">
+          <div class="gallery-caption">
+            <span>Baía Secreta</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-index="4" data-tilt-gallery>
+          <img src="img/gallery_5.jpg" alt="Après-Sea nos bares" loading="lazy">
+          <div class="gallery-caption">
+            <span>Nightlife</span>
+          </div>
+        </div>
+        <div class="gallery-item reveal-scale" data-index="5" data-tilt-gallery>
+          <img src="img/gallery_6.jpg" alt="Pôr do sol no catamarã" loading="lazy">
+          <div class="gallery-caption">
+            <span>Sunset</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider Inverted -->
+  <div class="wave-divider wave-divider-flip">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,40 C360,0 720,80 1080,40 C1260,20 1380,60 1440,40 L1440,80 L0,80 Z" fill="#F2F1EC"/>
+    </svg>
+  </div>
+
+  <!-- ============ BARCOS ============ -->
+  <section id="barcos" class="section-bg-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">A Tua Casa no Mar</span>
+        <h2>O Barco</h2>
+        <p>Catamarãs modernos e espaçosos — o conforto perfeito para a aventura.</p>
+      </div>
+      <div class="boat-layout">
+        <div class="boat-image reveal-left" data-tilt-gallery>
+          <img src="img/boat_catamaran.jpg" alt="Catamarã Lagoon" loading="lazy">
+        </div>
+        <div class="boat-info reveal-right">
+          <h3>Catamarã Premium</h3>
+          <p>Navega num catamarã de última geração com todo o conforto. Espaço amplo, cabines privadas e um deck perfeito para relaxar ou festejar.</p>
+          <div class="boat-specs">
+            <div class="spec-item" data-tilt>
+              <div class="spec-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 19.128a9.38 9.38 0 002.625.372 9.337 9.337 0 004.121-.952 4.125 4.125 0 00-7.533-2.493M15 19.128v-.003c0-1.113-.285-2.16-.786-3.07M15 19.128v.106A12.318 12.318 0 018.624 21c-2.331 0-4.512-.645-6.374-1.766l-.001-.109a6.375 6.375 0 0111.964-3.07M12 6.375a3.375 3.375 0 11-6.75 0 3.375 3.375 0 016.75 0zm8.25 2.25a2.625 2.625 0 11-5.25 0 2.625 2.625 0 015.25 0z"/>
+                </svg>
+              </div>
+              <div class="spec-text">
+                <span class="spec-label">Capacidade</span>
+                <span class="spec-value" data-count="16">0</span>
+                <span class="spec-unit">Pessoas</span>
+              </div>
+            </div>
+            <div class="spec-item" data-tilt>
+              <div class="spec-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 12l8.954-8.955c.44-.439 1.152-.439 1.591 0L21.75 12M4.5 9.75v10.125c0 .621.504 1.125 1.125 1.125H9.75v-4.875c0-.621.504-1.125 1.125-1.125h2.25c.621 0 1.125.504 1.125 1.125V21h4.125c.621 0 1.125-.504 1.125-1.125V9.75M8.25 21h8.25"/>
+                </svg>
+              </div>
+              <div class="spec-text">
+                <span class="spec-label">Cabines</span>
+                <span class="spec-value" data-count="4">0</span>
+                <span class="spec-unit">Duplas</span>
+              </div>
+            </div>
+            <div class="spec-item" data-tilt>
+              <div class="spec-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 3.75v4.5m0-4.5h4.5m-4.5 0L9 9M3.75 20.25v-4.5m0 4.5h4.5m-4.5 0L9 15M20.25 3.75h-4.5m4.5 0v4.5m0-4.5L15 9m5.25 11.25h-4.5m4.5 0v-4.5m0 4.5L15 15"/>
+                </svg>
+              </div>
+              <div class="spec-text">
+                <span class="spec-label">Comprimento</span>
+                <span class="spec-value" data-count="12">0</span>
+                <span class="spec-unit">Metros</span>
+              </div>
+            </div>
+            <div class="spec-item" data-tilt>
+              <div class="spec-icon">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5">
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M9.594 3.94c.09-.542.56-.94 1.11-.94h2.593c.55 0 1.02.398 1.11.94l.213 1.281c.063.374.313.686.645.87.074.04.147.083.22.127.324.196.72.257 1.075.124l1.217-.456a1.125 1.125 0 011.37.49l1.296 2.247a1.125 1.125 0 01-.26 1.431l-1.003.827c-.293.24-.438.613-.431.992a6.759 6.759 0 010 .255c-.007.378.138.75.43.99l1.005.828c.424.35.534.954.26 1.43l-1.298 2.247a1.125 1.125 0 01-1.369.491l-1.217-.456c-.355-.133-.75-.072-1.076.124a6.57 6.57 0 01-.22.128c-.331.183-.581.495-.644.869l-.213 1.28c-.09.543-.56.941-1.11.941h-2.594c-.55 0-1.02-.398-1.11-.94l-.213-1.281c-.062-.374-.312-.686-.644-.87a6.52 6.52 0 01-.22-.127c-.325-.196-.72-.257-1.076-.124l-1.217.456a1.125 1.125 0 01-1.369-.49l-1.297-2.247a1.125 1.125 0 01.26-1.431l1.004-.827c.292-.24.437-.613.43-.992a6.932 6.932 0 010-.255c.007-.378-.138-.75-.43-.99l-1.004-.828a1.125 1.125 0 01-.26-1.43l1.297-2.247a1.125 1.125 0 011.37-.491l1.216.456c.356.133.751.072 1.076-.124.072-.044.146-.087.22-.128.332-.183.582-.495.644-.869l.214-1.281z"/>
+                  <path stroke-linecap="round" stroke-linejoin="round" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/>
+                </svg>
+              </div>
+              <div class="spec-text">
+                <span class="spec-label">Extras</span>
+                <span class="spec-value">SUP</span>
+                <span class="spec-unit">& Snorkel</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ DESTAQUES ============ -->
+  <section id="destaques">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">O Que Vais Viver</span>
+        <h2>Destaques</h2>
+        <p>Cada dia é único. Cada momento é inesquecível.</p>
+      </div>
+
+      <!-- Horizontal scroll text -->
+      <div class="horizontal-text reveal">
+        <div class="horizontal-text-inner">
+          ILHAS SECRETAS — APRÈS-SEA — SUNSETS — STAND UP PADDLE — GASTRONOMIA — FESTAS — MERGULHO — CULTURA —
+        </div>
+      </div>
+
+      <div class="highlights-grid">
+        <div class="highlight-card large reveal" data-tilt-gallery>
+          <div class="card-image">
+            <img src="img/gallery_4.jpg" alt="Ilhas Secretas" loading="lazy">
+          </div>
+          <span class="card-tag">Exclusivo</span>
+          <div class="card-content">
+            <h3>Ilhas Secretas</h3>
+            <p>Baías paradisíacas onde só chegas de barco</p>
+          </div>
+        </div>
+        <div class="highlight-card reveal" data-tilt-gallery>
+          <div class="card-image">
+            <img src="img/gallery_5.jpg" alt="Après-Sea" loading="lazy">
+          </div>
+          <span class="card-tag">Nightlife</span>
+          <div class="card-content">
+            <h3>Après-Sea</h3>
+            <p>A vida noturna das ilhas gregas</p>
+          </div>
+        </div>
+        <div class="highlight-card reveal" data-tilt-gallery>
+          <div class="card-image">
+            <img src="img/gallery_2.jpg" alt="Stand Up Paddle" loading="lazy">
+          </div>
+          <span class="card-tag">Aventura</span>
+          <div class="card-content">
+            <h3>SUP & Mergulho</h3>
+            <p>Atividades no paraíso</p>
+          </div>
+        </div>
+        <div class="highlight-card reveal" data-tilt-gallery>
+          <div class="card-image">
+            <img src="img/gallery_3.jpg" alt="Gastronomia" loading="lazy">
+          </div>
+          <span class="card-tag">Food</span>
+          <div class="card-content">
+            <h3>Gastronomia Local</h3>
+            <p>Sabores autênticos do Mediterrâneo</p>
+          </div>
+        </div>
+        <div class="highlight-card reveal" data-tilt-gallery>
+          <div class="card-image">
+            <img src="img/gallery_6.jpg" alt="Sunsets" loading="lazy">
+          </div>
+          <span class="card-tag">Vibes</span>
+          <div class="card-content">
+            <h3>Sunsets Épicos</h3>
+            <p>Pôr do sol do deck do catamarã</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Wave Divider -->
+  <div class="wave-divider">
+    <svg viewBox="0 0 1440 80" preserveAspectRatio="none">
+      <path d="M0,20 C240,60 480,0 720,40 C960,80 1200,10 1440,40 L1440,80 L0,80 Z" fill="#F2F1EC"/>
+    </svg>
+  </div>
+
+  <!-- ============ ITINERÁRIO ============ -->
+  <section id="itinerario" class="section-bg-alt">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">7 Dias · 7 Ilhas</span>
+        <h2>Itinerário</h2>
+        <p>Cada dia uma nova ilha, um novo paraíso para explorar.</p>
+      </div>
+      <div class="timeline" id="timeline">
+        <!-- SVG drawing line -->
+        <svg class="timeline-svg" id="timelineSvg" preserveAspectRatio="none">
+          <line x1="50%" y1="0" x2="50%" y2="100%" class="timeline-line-bg"/>
+          <line x1="50%" y1="0" x2="50%" y2="100%" class="timeline-line-progress" id="timelineProgress"/>
+        </svg>
+
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 1</div>
+            <h3>Atenas → Marina de Lavrion</h3>
+            <p>Check-in, conhece o grupo e o teu catamarã. Primeiro jantar a bordo e briefing da aventura.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 2</div>
+            <h3>Kea</h3>
+            <p>Primeira navegação! Baías escondidas, mergulho em águas cristalinas e jantar num restaurante local.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 3</div>
+            <h3>Kythnos</h3>
+            <p>Praias desertas e fontes termais naturais. SUP e snorkel na baía de Kolona.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 4</div>
+            <h3>Serifos</h3>
+            <p>Vila branca no topo da colina. Almoço no mar, trilho até à Chora e noite nos bares locais.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 5</div>
+            <h3>Sifnos</h3>
+            <p>Ilha da gastronomia! Melhor comida das Cíclades, praias paradisíacas e pôr do sol épico.</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 6</div>
+            <h3>Milos</h3>
+            <p>A joia escondida. Sarakiniko, Kleftiko — formações rochosas únicas. Festa de despedida!</p>
+          </div>
+        </div>
+        <div class="timeline-item" data-timeline>
+          <div class="timeline-dot"></div>
+          <div class="timeline-content">
+            <div class="timeline-day">Dia 7</div>
+            <h3>Regresso a Atenas</h3>
+            <p>Último mergulho matinal, navegação de regresso. Até à próxima Yacht Season!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ PREÇOS ============ -->
+  <section id="precos">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Pacotes</span>
+        <h2>Preços</h2>
+        <p>Escolhe o pacote que melhor se adapta a ti.</p>
+      </div>
+      <div class="pricing-grid">
+        <!-- Essential -->
+        <div class="pricing-card reveal" data-tilt>
+          <div class="plan-name">Essential</div>
+          <div class="plan-price">€799<span>/pp</span></div>
+          <div class="plan-period">por pessoa · 7 noites</div>
+          <ul class="plan-features">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Lugar no catamarã (cabine partilhada)
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Skipper profissional
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              SUP & equipamento snorkel
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Taxas de marina incluídas
+            </li>
+          </ul>
+          <a href="#" class="btn btn-secondary magnetic">Escolher</a>
+        </div>
+
+        <!-- Popular -->
+        <div class="pricing-card featured reveal" data-tilt>
+          <div class="pricing-glow"></div>
+          <span class="pricing-badge">Mais Popular</span>
+          <div class="plan-name">All-In</div>
+          <div class="plan-price">€1.099<span>/pp</span></div>
+          <div class="plan-period">por pessoa · 7 noites</div>
+          <ul class="plan-features">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Tudo do Essential
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Pequeno-almoço & almoço incluídos
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Bebidas a bordo
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Pack fotografia profissional
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Toalhas & roupa de cama premium
+            </li>
+          </ul>
+          <a href="#" class="btn btn-primary magnetic">Escolher</a>
+        </div>
+
+        <!-- VIP -->
+        <div class="pricing-card reveal" data-tilt>
+          <div class="plan-name">VIP</div>
+          <div class="plan-price">€1.499<span>/pp</span></div>
+          <div class="plan-period">por pessoa · 7 noites</div>
+          <ul class="plan-features">
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Tudo do All-In
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Cabine privada
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Transfer aeroporto ↔ marina
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Jantares incluídos
+            </li>
+            <li>
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="2"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg>
+              Experiências exclusivas na ilha
+            </li>
+          </ul>
+          <a href="#" class="btn btn-secondary magnetic">Escolher</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <div class="nav-logo">
+            <span class="logo-yacht">YACHT</span>
+            <span class="logo-season">SEASON</span>
+          </div>
+          <p>A melhor experiência de vela no Mediterrâneo. Ilhas gregas, catamarã e memórias para toda a vida.</p>
+          <div class="footer-social" style="margin-top: 20px;">
+            <a href="#" aria-label="Instagram">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.5"><rect x="2" y="2" width="20" height="20" rx="5"/><circle cx="12" cy="12" r="5"/><circle cx="17.5" cy="6.5" r="1.5" fill="currentColor" stroke="none"/></svg>
+            </a>
+            <a href="#" aria-label="TikTok">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1v-3.5a6.37 6.37 0 00-.79-.05A6.34 6.34 0 003.15 15.2a6.34 6.34 0 0010.86 4.48V13.2a8.26 8.26 0 004.58 1.39V11.1a4.83 4.83 0 01-1-.1V6.69h2z"/></svg>
+            </a>
+            <a href="#" aria-label="WhatsApp">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            </a>
+          </div>
+        </div>
+        <div>
+          <h4>Navegar</h4>
+          <ul class="footer-links">
+            <li><a href="#como-funciona">Como Funciona</a></li>
+            <li><a href="#galeria">Galeria</a></li>
+            <li><a href="#barcos">Barcos</a></li>
+            <li><a href="#destaques">Destaques</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Info</h4>
+          <ul class="footer-links">
+            <li><a href="#itinerario">Itinerário</a></li>
+            <li><a href="#precos">Preços</a></li>
+            <li><a href="#">FAQ</a></li>
+            <li><a href="#">Contacto</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4>Contacto</h4>
+          <ul class="footer-links">
+            <li><a href="mailto:info@yachtseason.com">info@yachtseason.com</a></li>
+            <li><a href="#">+351 912 345 678</a></li>
+            <li><a href="#">Lisboa, Portugal</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <span>© 2026 Yacht Season. Todos os direitos reservados.</span>
+        <span>Feito com ☀️ para o Mediterrâneo</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox -->
+  <div class="lightbox" id="lightbox">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Fechar">✕</button>
+    <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Anterior">‹</button>
+    <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Seguinte">›</button>
+    <img src="" alt="Galeria" id="lightboxImg">
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
