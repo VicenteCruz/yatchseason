@@ -1,15 +1,18 @@
 /* ============================================
    YACHT SEASON — Interactions & WOW Animations
+   Mobile-First Premium Experience
    ============================================ */
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+  const isMobile = window.innerWidth <= 768;
+
   // ========================================
-  // CUSTOM CURSOR
+  // CUSTOM CURSOR (desktop only)
   // ========================================
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
 
   if (!isTouchDevice && cursorDot && cursorRing) {
     let mouseX = 0, mouseY = 0;
@@ -22,7 +25,6 @@ document.addEventListener('DOMContentLoaded', () => {
       cursorDot.style.top = mouseY + 'px';
     });
 
-    // Smooth ring follow with lerp
     function animateRing() {
       ringX += (mouseX - ringX) * 0.12;
       ringY += (mouseY - ringY) * 0.12;
@@ -32,14 +34,12 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateRing();
 
-    // Hover state for interactive elements
     const hoverTargets = document.querySelectorAll('a, button, .btn, .magnetic, .nav-links a, .footer-social a');
     hoverTargets.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
     });
 
-    // Gallery cursor state
     const galleryItems = document.querySelectorAll('.gallery-item');
     galleryItems.forEach(item => {
       item.addEventListener('mouseenter', () => {
@@ -69,12 +69,11 @@ document.addEventListener('DOMContentLoaded', () => {
       navbar.classList.remove('scrolled');
     }
 
-    // Active section highlight
+    // Active section
     let currentSection = '';
     sections.forEach(section => {
       const sectionTop = section.offsetTop - 120;
-      const sectionHeight = section.offsetHeight;
-      if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+      if (scrollY >= sectionTop && scrollY < sectionTop + section.offsetHeight) {
         currentSection = section.getAttribute('id');
       }
     });
@@ -90,10 +89,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   window.addEventListener('scroll', () => {
-    if (!ticking) {
-      requestAnimationFrame(updateNavbar);
-      ticking = true;
-    }
+    if (!ticking) { requestAnimationFrame(updateNavbar); ticking = true; }
   }, { passive: true });
 
   // ========================================
@@ -109,15 +105,13 @@ document.addEventListener('DOMContentLoaded', () => {
         const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
         window.scrollTo({ top: targetPos, behavior: 'smooth' });
 
-        if (mobileMenu.classList.contains('open')) {
-          closeMobileMenu();
-        }
+        if (mobileMenu.classList.contains('open')) closeMobileMenu();
       }
     });
   });
 
   // ========================================
-  // MOBILE MENU
+  // MOBILE MENU (enhanced with stagger)
   // ========================================
   const hamburger = document.getElementById('hamburger');
   const mobileMenu = document.getElementById('mobileMenu');
@@ -126,12 +120,18 @@ document.addEventListener('DOMContentLoaded', () => {
     hamburger.classList.add('active');
     mobileMenu.classList.add('open');
     document.body.style.overflow = 'hidden';
+    // Hide mobile CTA while menu is open
+    const cta = document.getElementById('mobileCta');
+    if (cta) cta.style.display = 'none';
   }
 
   function closeMobileMenu() {
     hamburger.classList.remove('active');
     mobileMenu.classList.remove('open');
     document.body.style.overflow = '';
+    // Restore mobile CTA
+    const cta = document.getElementById('mobileCta');
+    if (cta) cta.style.display = '';
   }
 
   hamburger.addEventListener('click', () => {
@@ -141,6 +141,52 @@ document.addEventListener('DOMContentLoaded', () => {
   mobileMenu.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', closeMobileMenu);
   });
+
+  // ========================================
+  // FLOATING MOBILE CTA
+  // ========================================
+  const mobileCta = document.getElementById('mobileCta');
+
+  if (mobileCta) {
+    let lastScrollY = window.scrollY;
+    let ctaVisible = false;
+    const heroSection = document.getElementById('hero');
+
+    function updateMobileCta() {
+      const scrollY = window.scrollY;
+      const heroBottom = heroSection ? heroSection.offsetTop + heroSection.offsetHeight : window.innerHeight;
+      const isScrollingDown = scrollY > lastScrollY;
+
+      // Show after scrolling past hero
+      if (scrollY > heroBottom * 0.7 && isScrollingDown && !ctaVisible) {
+        mobileCta.classList.add('visible');
+        ctaVisible = true;
+      }
+
+      // Hide when back at top
+      if (scrollY < heroBottom * 0.3 && ctaVisible) {
+        mobileCta.classList.remove('visible');
+        ctaVisible = false;
+      }
+
+      // Hide near pricing section (already there)
+      const precosSection = document.getElementById('precos');
+      if (precosSection) {
+        const precosTop = precosSection.getBoundingClientRect().top;
+        if (precosTop < window.innerHeight * 0.5) {
+          mobileCta.classList.remove('visible');
+        } else if (scrollY > heroBottom * 0.7) {
+          mobileCta.classList.add('visible');
+        }
+      }
+
+      lastScrollY = scrollY;
+    }
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(updateMobileCta);
+    }, { passive: true });
+  }
 
   // ========================================
   // SCROLL REVEAL ANIMATIONS
@@ -154,15 +200,15 @@ document.addEventListener('DOMContentLoaded', () => {
         if (parent && parent.classList.contains('stagger')) {
           const children = Array.from(parent.children);
           const index = children.indexOf(entry.target);
-          entry.target.style.transitionDelay = `${index * 0.12}s`;
+          entry.target.style.transitionDelay = `${index * 0.1}s`;
         }
         entry.target.classList.add('visible');
         revealObserver.unobserve(entry.target);
       }
     });
   }, {
-    threshold: 0.12,
-    rootMargin: '0px 0px -30px 0px'
+    threshold: isMobile ? 0.08 : 0.12,
+    rootMargin: isMobile ? '0px 0px -20px 0px' : '0px 0px -30px 0px'
   });
 
   revealElements.forEach(el => revealObserver.observe(el));
@@ -174,7 +220,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroShapes = document.getElementById('heroShapes');
   const shapes = heroShapes ? heroShapes.querySelectorAll('.shape') : [];
 
-  // Mouse parallax for floating shapes
+  // Mouse parallax for shapes (desktop)
   if (heroShapes && !isTouchDevice) {
     document.addEventListener('mousemove', (e) => {
       const centerX = window.innerWidth / 2;
@@ -191,7 +237,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
-  // Hero background parallax on scroll
+  // Scroll parallax for hero bg (both mobile and desktop, GPU-accelerated)
   if (heroBgImg) {
     let parallaxTicking = false;
 
@@ -199,10 +245,9 @@ document.addEventListener('DOMContentLoaded', () => {
       if (!parallaxTicking) {
         requestAnimationFrame(() => {
           const scrollY = window.scrollY;
-          const heroHeight = window.innerHeight;
-          if (scrollY <= heroHeight) {
-            const translateY = scrollY * 0.3;
-            heroBgImg.style.transform = `translateY(${translateY}px) scale(1.08)`;
+          if (scrollY <= window.innerHeight) {
+            const rate = isMobile ? 0.15 : 0.3;
+            heroBgImg.style.transform = `translate3d(0, ${scrollY * rate}px, 0) scale(1.08)`;
           }
           parallaxTicking = false;
         });
@@ -210,84 +255,63 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     }, { passive: true });
 
-    heroBgImg.style.transition = 'transform 0.1s linear';
+    heroBgImg.style.willChange = 'transform';
+    heroBgImg.style.transition = 'none'; // Remove transition for smooth GPU animation
   }
 
   // ========================================
-  // 3D TILT EFFECT
+  // 3D TILT EFFECT (desktop only)
   // ========================================
   if (!isTouchDevice) {
     const tiltElements = document.querySelectorAll('[data-tilt]');
-    
+
     tiltElements.forEach(el => {
       el.addEventListener('mousemove', (e) => {
         const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const rotateX = ((e.clientY - centerY) / (rect.height / 2)) * -4;
-        const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 4;
-        
+        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -4;
+        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 4;
         el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.02)`;
       });
-
       el.addEventListener('mouseleave', () => {
-        el.style.transform = 'perspective(800px) rotateX(0deg) rotateY(0deg) scale(1)';
+        el.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
         el.style.transition = 'transform 0.5s ease';
       });
-
-      el.addEventListener('mouseenter', () => {
-        el.style.transition = 'transform 0.15s ease';
-      });
+      el.addEventListener('mouseenter', () => { el.style.transition = 'transform 0.15s ease'; });
     });
 
-    // Gallery 3D tilt (stronger effect)
     const tiltGallery = document.querySelectorAll('[data-tilt-gallery]');
-    
+
     tiltGallery.forEach(el => {
       el.addEventListener('mousemove', (e) => {
         const rect = el.getBoundingClientRect();
-        const centerX = rect.left + rect.width / 2;
-        const centerY = rect.top + rect.height / 2;
-        const rotateX = ((e.clientY - centerY) / (rect.height / 2)) * -3;
-        const rotateY = ((e.clientX - centerX) / (rect.width / 2)) * 3;
-        
+        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -3;
+        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 3;
         el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
       });
-
       el.addEventListener('mouseleave', () => {
-        el.style.transform = 'perspective(1000px) rotateX(0deg) rotateY(0deg)';
+        el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
         el.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
       });
-
-      el.addEventListener('mouseenter', () => {
-        el.style.transition = 'transform 0.15s ease';
-      });
+      el.addEventListener('mouseenter', () => { el.style.transition = 'transform 0.15s ease'; });
     });
   }
 
   // ========================================
-  // MAGNETIC BUTTONS
+  // MAGNETIC BUTTONS (desktop only)
   // ========================================
   if (!isTouchDevice) {
-    const magneticBtns = document.querySelectorAll('.magnetic');
-
-    magneticBtns.forEach(btn => {
+    document.querySelectorAll('.magnetic').forEach(btn => {
       btn.addEventListener('mousemove', (e) => {
         const rect = btn.getBoundingClientRect();
         const x = e.clientX - rect.left - rect.width / 2;
         const y = e.clientY - rect.top - rect.height / 2;
-
         btn.style.transform = `translate(${x * 0.2}px, ${y * 0.2}px)`;
       });
-
       btn.addEventListener('mouseleave', () => {
         btn.style.transform = 'translate(0, 0)';
         btn.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
       });
-
-      btn.addEventListener('mouseenter', () => {
-        btn.style.transition = 'transform 0.1s ease';
-      });
+      btn.addEventListener('mouseenter', () => { btn.style.transition = 'transform 0.1s ease'; });
     });
   }
 
@@ -302,25 +326,20 @@ document.addEventListener('DOMContentLoaded', () => {
     const updateTimeline = () => {
       const timelineRect = timeline.getBoundingClientRect();
       const timelineHeight = timeline.offsetHeight;
-      const viewportCenter = window.innerHeight * 0.6;
+      const viewportTrigger = window.innerHeight * (isMobile ? 0.7 : 0.6);
 
-      // Calculate how far through the timeline we've scrolled
       const progress = Math.min(1, Math.max(0,
-        (viewportCenter - timelineRect.top) / timelineHeight
+        (viewportTrigger - timelineRect.top) / timelineHeight
       ));
 
-      // Update the SVG line
       const totalLength = timelineHeight;
       timelineProgress.style.strokeDasharray = `${totalLength}`;
       timelineProgress.style.strokeDashoffset = `${totalLength * (1 - progress)}`;
 
-      // Reveal timeline items based on scroll position
-      timelineItems.forEach((item, index) => {
+      timelineItems.forEach((item) => {
         const itemRect = item.getBoundingClientRect();
-        if (itemRect.top < window.innerHeight * 0.75) {
-          setTimeout(() => {
-            item.classList.add('visible');
-          }, index * 80);
+        if (itemRect.top < window.innerHeight * 0.8) {
+          item.classList.add('visible');
         }
       });
     };
@@ -329,12 +348,11 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(updateTimeline);
     }, { passive: true });
 
-    // Initial call
     updateTimeline();
   }
 
   // ========================================
-  // GALLERY LIGHTBOX
+  // GALLERY LIGHTBOX + SWIPE GESTURES
   // ========================================
   const galleryClickItems = document.querySelectorAll('.gallery-item');
   const lightbox = document.getElementById('lightbox');
@@ -342,6 +360,7 @@ document.addEventListener('DOMContentLoaded', () => {
   const lightboxClose = document.getElementById('lightboxClose');
   const lightboxPrev = document.getElementById('lightboxPrev');
   const lightboxNext = document.getElementById('lightboxNext');
+  const lightboxCounter = document.getElementById('lightboxCounter');
   let currentLightboxIndex = 0;
   const galleryImages = [];
 
@@ -355,40 +374,52 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   });
 
+  function updateCounter() {
+    if (lightboxCounter) {
+      lightboxCounter.textContent = `${currentLightboxIndex + 1} / ${galleryImages.length}`;
+    }
+  }
+
   function openLightbox() {
     lightboxImg.src = galleryImages[currentLightboxIndex];
     lightboxImg.style.transform = 'scale(0.9)';
+    lightboxImg.style.opacity = '0';
     lightbox.classList.add('open');
     document.body.style.overflow = 'hidden';
-    
-    // Animate in
+    updateCounter();
+
     requestAnimationFrame(() => {
-      lightboxImg.style.transform = 'scale(1)';
+      requestAnimationFrame(() => {
+        lightboxImg.style.transform = 'scale(1)';
+        lightboxImg.style.opacity = '1';
+      });
     });
   }
 
   function closeLightbox() {
     lightboxImg.style.transform = 'scale(0.9)';
+    lightboxImg.style.opacity = '0';
     setTimeout(() => {
       lightbox.classList.remove('open');
       document.body.style.overflow = '';
-    }, 200);
+    }, 250);
   }
 
   function navigateLightbox(direction) {
     currentLightboxIndex = (currentLightboxIndex + direction + galleryImages.length) % galleryImages.length;
-    
-    const dirX = direction > 0 ? 40 : -40;
+
+    const dirX = direction > 0 ? 50 : -50;
     lightboxImg.style.opacity = '0';
-    lightboxImg.style.transform = `translateX(${dirX}px) scale(0.95)`;
-    
+    lightboxImg.style.transform = `translate3d(${dirX}px, 0, 0) scale(0.95)`;
+
     setTimeout(() => {
       lightboxImg.src = galleryImages[currentLightboxIndex];
-      lightboxImg.style.transform = `translateX(${-dirX}px) scale(0.95)`;
-      
+      lightboxImg.style.transform = `translate3d(${-dirX}px, 0, 0) scale(0.95)`;
+      updateCounter();
+
       requestAnimationFrame(() => {
         lightboxImg.style.opacity = '1';
-        lightboxImg.style.transform = 'translateX(0) scale(1)';
+        lightboxImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
       });
     }, 200);
   }
@@ -396,7 +427,7 @@ document.addEventListener('DOMContentLoaded', () => {
   lightboxClose.addEventListener('click', (e) => { e.stopPropagation(); closeLightbox(); });
   lightboxPrev.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(-1); });
   lightboxNext.addEventListener('click', (e) => { e.stopPropagation(); navigateLightbox(1); });
-  
+
   lightbox.addEventListener('click', (e) => {
     if (e.target === lightbox) closeLightbox();
   });
@@ -407,6 +438,81 @@ document.addEventListener('DOMContentLoaded', () => {
     if (e.key === 'ArrowLeft') navigateLightbox(-1);
     if (e.key === 'ArrowRight') navigateLightbox(1);
   });
+
+  // ========================================
+  // TOUCH SWIPE FOR LIGHTBOX
+  // ========================================
+  if (isTouchDevice) {
+    let touchStartX = 0;
+    let touchStartY = 0;
+    let touchMoveX = 0;
+    let isDragging = false;
+    const swipeThreshold = 50;
+
+    lightbox.addEventListener('touchstart', (e) => {
+      if (!lightbox.classList.contains('open')) return;
+      touchStartX = e.touches[0].clientX;
+      touchStartY = e.touches[0].clientY;
+      touchMoveX = 0;
+      isDragging = true;
+      lightboxImg.style.transition = 'none';
+    }, { passive: true });
+
+    lightbox.addEventListener('touchmove', (e) => {
+      if (!isDragging || !lightbox.classList.contains('open')) return;
+
+      const currentX = e.touches[0].clientX;
+      const currentY = e.touches[0].clientY;
+      const deltaX = currentX - touchStartX;
+      const deltaY = currentY - touchStartY;
+
+      // If more vertical than horizontal, don't interfere
+      if (Math.abs(deltaY) > Math.abs(deltaX) * 1.5 && Math.abs(deltaX) < 20) return;
+
+      touchMoveX = deltaX;
+
+      // Live drag feedback: move image with finger
+      const dampened = deltaX * 0.6;
+      const scale = 1 - Math.abs(deltaX) * 0.0003;
+      lightboxImg.style.transform = `translate3d(${dampened}px, 0, 0) scale(${Math.max(0.9, scale)})`;
+      lightboxImg.style.opacity = `${1 - Math.abs(deltaX) * 0.002}`;
+    }, { passive: true });
+
+    lightbox.addEventListener('touchend', () => {
+      if (!isDragging) return;
+      isDragging = false;
+
+      lightboxImg.style.transition = 'transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.25s ease';
+
+      if (Math.abs(touchMoveX) > swipeThreshold) {
+        const direction = touchMoveX > 0 ? -1 : 1;
+        navigateLightbox(direction);
+      } else {
+        // Snap back with spring
+        lightboxImg.style.transform = 'translate3d(0, 0, 0) scale(1)';
+        lightboxImg.style.opacity = '1';
+      }
+    }, { passive: true });
+
+    // Swipe down to close
+    let touchStartYClose = 0;
+    let touchMoveYClose = 0;
+
+    lightboxImg.addEventListener('touchstart', (e) => {
+      touchStartYClose = e.touches[0].clientY;
+    }, { passive: true });
+
+    lightboxImg.addEventListener('touchmove', (e) => {
+      touchMoveYClose = e.touches[0].clientY - touchStartYClose;
+    }, { passive: true });
+
+    lightboxImg.addEventListener('touchend', () => {
+      if (touchMoveYClose > 100) {
+        closeLightbox();
+      }
+      touchMoveYClose = 0;
+    }, { passive: true });
+  }
 
   // ========================================
   // COUNTER ANIMATION
@@ -428,18 +534,14 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   function animateCounter(el, target) {
-    let current = 0;
     const duration = 1200;
     const startTime = performance.now();
 
     function update(currentTime) {
       const elapsed = currentTime - startTime;
       const progress = Math.min(elapsed / duration, 1);
-      
-      // Ease out cubic
       const eased = 1 - Math.pow(1 - progress, 3);
-      current = Math.floor(eased * target);
-      el.textContent = current;
+      el.textContent = Math.floor(eased * target);
 
       if (progress < 1) {
         requestAnimationFrame(update);
@@ -449,6 +551,47 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     requestAnimationFrame(update);
+  }
+
+  // ========================================
+  // MOBILE: HAPTIC GALLERY SCROLL FEEDBACK
+  // ========================================
+  if (isTouchDevice) {
+    const galleryGrid = document.querySelector('.gallery-grid');
+    if (galleryGrid) {
+      let lastSnappedIndex = -1;
+
+      galleryGrid.addEventListener('scroll', () => {
+        const scrollLeft = galleryGrid.scrollLeft;
+        const itemWidth = galleryGrid.querySelector('.gallery-item')?.offsetWidth || 1;
+        const gap = 12;
+        const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+
+        if (currentIndex !== lastSnappedIndex) {
+          lastSnappedIndex = currentIndex;
+          // Subtle vibration on snap (if supported)
+          if (navigator.vibrate) {
+            navigator.vibrate(5);
+          }
+        }
+      }, { passive: true });
+    }
+  }
+
+  // ========================================
+  // MOBILE: PRICING CARD SNAP SCROLL
+  // ========================================
+  if (isMobile) {
+    const pricingGrid = document.querySelector('.pricing-grid');
+    if (pricingGrid) {
+      // Scroll to featured card on load
+      const featuredCard = pricingGrid.querySelector('.pricing-card.featured');
+      if (featuredCard) {
+        setTimeout(() => {
+          featuredCard.scrollIntoView({ behavior: 'smooth', inline: 'center', block: 'nearest' });
+        }, 300);
+      }
+    }
   }
 
   // ========================================

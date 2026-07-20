@@ -44,13 +44,18 @@
 
   <!-- Mobile Menu -->
   <div class="mobile-menu" id="mobileMenu">
-    <a href="#como-funciona">Como Funciona</a>
-    <a href="#galeria">Galeria</a>
-    <a href="#barcos">Barcos</a>
-    <a href="#destaques">Destaques</a>
-    <a href="#itinerario">Itinerário</a>
-    <a href="#precos">Preços</a>
-    <a href="#precos" class="btn btn-primary" style="margin-top: 12px;">Reservar</a>
+    <div class="mobile-menu-inner">
+      <a href="#como-funciona" class="mobile-menu-link" style="--i:0">Como Funciona</a>
+      <a href="#galeria" class="mobile-menu-link" style="--i:1">Galeria</a>
+      <a href="#barcos" class="mobile-menu-link" style="--i:2">Barcos</a>
+      <a href="#destaques" class="mobile-menu-link" style="--i:3">Destaques</a>
+      <a href="#itinerario" class="mobile-menu-link" style="--i:4">Itinerário</a>
+      <a href="#precos" class="mobile-menu-link" style="--i:5">Preços</a>
+      <a href="#precos" class="btn btn-primary mobile-menu-link" style="--i:6; margin-top: 16px;">Reservar Agora</a>
+    </div>
+    <div class="mobile-menu-footer">
+      <span>Grécia · Verão 2026</span>
+    </div>
   </div>
 
   <!-- ============ HERO ============ -->
@@ -655,6 +660,18 @@
     <button class="lightbox-nav lightbox-prev" id="lightboxPrev" aria-label="Anterior">‹</button>
     <button class="lightbox-nav lightbox-next" id="lightboxNext" aria-label="Seguinte">›</button>
     <img src="" alt="Galeria" id="lightboxImg">
+    <div class="lightbox-swipe-hint" id="lightboxSwipeHint">
+      <span>← Swipe →</span>
+    </div>
+    <div class="lightbox-counter" id="lightboxCounter">1 / 6</div>
+  </div>
+
+  <!-- Floating Mobile CTA -->
+  <div class="mobile-cta" id="mobileCta">
+    <a href="#precos" class="mobile-cta-btn">
+      <span>Reservar Agora</span>
+      <span class="mobile-cta-price">desde €799</span>
+    </a>
   </div>
 
   <script src="script.js"></script>
