@@ -51,7 +51,6 @@
 }
 
 html {
-  scroll-behavior: smooth;
   font-size: 16px;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -673,9 +672,12 @@ body.section-precos .cursor-ring {
   color: var(--color-text);
 }
 
-.title-line.highlight .title-line-inner {
-  animation-delay: 0.7s;
+.title-line.highlight .title-line-inner.split-letters {
+  animation: none;
+  transform: none;
   color: var(--color-primary-dark);
+  display: flex;
+  justify-content: center;
 }
 
 @keyframes revealText {
@@ -1334,77 +1336,7 @@ section:has(+ .wave-divider-flip) {
   transition: stroke-dashoffset 0.05s linear;
 }
 
-.timeline-item {
-  display: flex;
-  align-items: flex-start;
-  margin-bottom: 48px;
-  position: relative;
-  opacity: 0;
-  transform: translateY(20px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
-}
 
-.timeline-item.visible {
-  opacity: 1;
-  transform: translateY(0);
-}
-
-.timeline-item:last-child { margin-bottom: 0; }
-
-.timeline-item:nth-child(odd) {
-  flex-direction: row;
-  text-align: right;
-  padding-right: calc(50% + 32px);
-}
-
-.timeline-item:nth-child(even) {
-  flex-direction: row-reverse;
-  text-align: left;
-  padding-left: calc(50% + 32px);
-}
-
-.timeline-dot {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%) scale(0);
-  width: 16px;
-  height: 16px;
-  border-radius: 50%;
-  background: var(--color-primary);
-  border: 3px solid var(--color-bg-alt);
-  box-shadow: 0 0 0 2px var(--color-primary);
-  z-index: 1;
-  transition: transform 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-}
-
-.timeline-item.visible .timeline-dot {
-  transform: translateX(-50%) scale(1);
-}
-
-.timeline-content {
-  padding: 20px 24px;
-  background: var(--color-white);
-  border-radius: var(--radius-md);
-  box-shadow: var(--shadow-soft);
-  transition: box-shadow var(--transition);
-}
-
-.timeline-content:hover {
-  box-shadow: var(--shadow-card);
-}
-
-.timeline-day {
-  font-family: var(--font-heading);
-  font-size: 0.75rem;
-  font-weight: 700;
-  letter-spacing: 2px;
-  text-transform: uppercase;
-  color: var(--color-secondary);
-  margin-bottom: 6px;
-}
-
-.timeline-content h3 { font-size: 1.15rem; margin-bottom: 6px; }
-.timeline-content p { font-size: 0.9rem; color: var(--color-text-light); }
 
 /* ============================================
    REVIEWS (SOCIAL PROOF)
@@ -1651,7 +1583,7 @@ section:has(+ .wave-divider-flip) {
   font-size: 1.2rem;
   font-weight: 600;
   color: var(--color-text);
-  cursor: pointer;
+  cursor: none;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -2226,37 +2158,7 @@ section:has(+ .wave-divider-flip) {
 
   .horizontal-text { margin-bottom: 32px; }
 
-  /* — Timeline (mobile-optimized) — */
-  .timeline { max-width: 100%; }
 
-  .timeline-svg { left: 16px; width: 2px; }
-  .timeline-line-bg,
-  .timeline-line-progress { x1: 1; x2: 1; }
-
-  .timeline-dot {
-    left: 16px;
-    width: 14px;
-    height: 14px;
-  }
-
-  .timeline-item {
-    margin-bottom: 24px;
-  }
-
-  .timeline-item:nth-child(odd),
-  .timeline-item:nth-child(even) {
-    flex-direction: row;
-    text-align: left;
-    padding-left: 44px;
-    padding-right: 0;
-  }
-
-  .timeline-content {
-    padding: 16px 18px;
-  }
-
-  .timeline-content h3 { font-size: 1.05rem; }
-  .timeline-content p { font-size: 0.85rem; }
 
   /* — Reviews (horizontal scroll + snap) — */
   .reviews-grid {
@@ -2549,5 +2451,651 @@ section:has(+ .wave-divider-flip) {
   }
   .countdown-timer {
     font-size: 0.95rem;
+  }
+}
+
+/* ============================================
+   LENIS SMOOTH SCROLL
+   ============================================ */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+
+/* ============================================
+   HERO SPLIT-LETTER ANIMATION
+   ============================================ */
+.split-letters .letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(110%) rotateX(-80deg);
+  animation: letterReveal 0.8s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+  animation-delay: calc(0.7s + var(--i) * 0.06s);
+  transform-origin: bottom center;
+}
+
+.letter-space {
+  width: 0.25em;
+}
+
+@keyframes letterReveal {
+  0% {
+    opacity: 0;
+    transform: translateY(110%) rotateX(-80deg);
+  }
+  60% {
+    opacity: 1;
+    transform: translateY(-8%) rotateX(10deg);
+  }
+  80% {
+    transform: translateY(3%) rotateX(-3deg);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) rotateX(0);
+  }
+}
+
+/* ============================================
+   HORIZONTAL SCROLL — DESTAQUES
+   ============================================ */
+.destaques-section {
+  padding: 0;
+  position: relative;
+}
+
+.destaques-header-wrapper {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.destaques-header-wrapper .section-header {
+  margin-bottom: 20px;
+}
+
+.destaques-header-wrapper .horizontal-text {
+  margin-bottom: 20px;
+}
+
+.hscroll-wrapper {
+  position: relative;
+  height: 160vh;
+}
+
+.hscroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.hscroll-track {
+  display: flex;
+  gap: 24px;
+  padding: 0 60px;
+  will-change: transform;
+  transition: none;
+  flex-shrink: 0;
+}
+
+.hscroll-card {
+  flex: 0 0 380px;
+  height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hscroll-card-large {
+  flex: 0 0 540px;
+}
+
+.hscroll-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.hscroll-card .card-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hscroll-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.hscroll-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+.hscroll-card .card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+  color: white;
+}
+
+.hscroll-card .card-content h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.hscroll-card .card-content p {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+}
+
+.hscroll-card .card-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  z-index: 2;
+}
+
+#galeria {
+  padding-bottom: 40px;
+}
+
+/* ============================================
+   BEFORE/AFTER COMPARISON SLIDER
+   ============================================ */
+.compare-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--shadow-card);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.compare-image {
+  position: absolute;
+  inset: 0;
+}
+
+.compare-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.compare-before {
+  z-index: 2;
+  clip-path: inset(0 0% 0 0);
+  will-change: clip-path;
+}
+
+.compare-after {
+  z-index: 1;
+}
+
+.compare-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 4px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+  will-change: left;
+}
+
+.compare-handle-line {
+  width: 2px;
+  height: 100%;
+  background: white;
+  box-shadow: 0 0 12px rgba(0,0,0,0.35);
+}
+
+.compare-label {
+  position: absolute;
+  bottom: 20px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.compare-label-before {
+  left: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  backdrop-filter: blur(8px);
+}
+
+.compare-label-after {
+  right: 20px;
+  background: var(--color-primary);
+  color: var(--color-black);
+}
+
+/* ============================================
+   TIMELINE ITINERARY
+   ============================================ */
+#itinerario {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Wrapper */
+.timeline-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.timeline-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: saturate(0.85) contrast(0.95);
+}
+
+.timeline-bg-image.active {
+  opacity: 0.12; /* Subtle watermark opacity to blend with the cream background */
+}
+
+/* Overlay to blend and soften the backgrounds */
+.timeline-bg-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(242, 241, 236, 0.3) 0%, rgba(242, 241, 236, 0.85) 100%);
+  pointer-events: none;
+}
+
+#itinerario .container {
+  position: relative;
+  z-index: 2;
+}
+
+.timeline {
+  position: relative;
+  padding: 20px 0 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Vertical track — ::before pseudo-element */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+  transform: translateX(-50%);
+}
+
+/* Scroll-driven progress overlay */
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: var(--timeline-progress, 0%);
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  transform: translateX(-50%);
+  transition: height 0.15s linear;
+  will-change: height;
+  z-index: 1;
+}
+
+/* Default: content on the LEFT side */
+.timeline-item {
+  position: relative;
+  z-index: 2;
+  padding: 0 calc(50% + 28px) 56px 0;
+}
+
+/* Right-side items */
+.timeline-item.tl-right {
+  padding: 0 0 56px calc(50% + 28px);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* The numbered dot — always on the center line */
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transform: translateX(-50%);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.timeline-dot span {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  transition: color 0.3s;
+  line-height: 1;
+}
+
+/* Active state */
+.timeline-item.is-active .timeline-dot {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  transform: translateX(-50%) scale(1.15);
+  box-shadow: 0 0 0 5px rgba(186, 218, 85, 0.18);
+}
+
+.timeline-item.is-active .timeline-dot span {
+  color: var(--color-black);
+}
+
+/* Content card */
+.timeline-content {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease;
+}
+
+.timeline-item.is-active .timeline-content {
+  border-color: rgba(186, 218, 85, 0.3);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Day label */
+.timeline-day {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.timeline-item.is-active .timeline-day {
+  color: var(--color-primary-dark);
+}
+
+/* Title */
+.timeline-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+/* Description */
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+/* Tags */
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.timeline-tags span {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 4px 10px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-full);
+  color: var(--color-text-light);
+  transition: background 0.3s, color 0.3s;
+}
+
+.timeline-item.is-active .timeline-tags span {
+  background: rgba(186, 218, 85, 0.12);
+  color: var(--color-primary-dark);
+}
+
+/* Mobile: single column, line on the left */
+@media (max-width: 768px) {
+  .timeline {
+    max-width: 100%;
+  }
+
+  .timeline::before,
+  .timeline::after {
+    left: 16px;
+    transform: none;
+  }
+
+  .timeline-item,
+  .timeline-item.tl-right {
+    padding: 0 0 32px 48px;
+  }
+
+  .timeline-dot {
+    left: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    transform: none;
+  }
+
+  .timeline-item.is-active .timeline-dot {
+    transform: scale(1.15);
+  }
+
+  .timeline-content {
+    padding: 20px 22px;
+  }
+
+  .timeline-title {
+    font-size: 1.05rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
+  }
+}
+
+
+
+
+
+/* ============================================
+   RESPONSIVE — NEW FEATURES
+   ============================================ */
+@media (max-width: 1024px) {
+}
+
+@media (max-width: 768px) {
+  /* Horizontal scroll: fallback to vertical scroll on mobile */
+  .destaques-section {
+    padding: 40px 0 0;
+  }
+
+  .hscroll-wrapper {
+    height: auto;
+  }
+
+  .hscroll-sticky {
+    position: relative;
+    top: auto;
+    height: auto;
+    overflow: visible;
+    display: block;
+    padding: 0;
+  }
+
+  .destaques-header-wrapper {
+    margin-bottom: 16px;
+  }
+
+  .hscroll-track {
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-snap-type: x mandatory;
+    -webkit-overflow-scrolling: touch;
+    padding: 0 20px 20px;
+    gap: 16px;
+    scrollbar-width: none;
+  }
+
+  .hscroll-track::-webkit-scrollbar { display: none; }
+
+  .hscroll-card {
+    flex: 0 0 78vw;
+    height: 360px;
+    scroll-snap-align: center;
+  }
+
+  .hscroll-card-large {
+    flex: 0 0 78vw;
+  }
+
+  /* Compare slider */
+  .compare-container {
+    aspect-ratio: 4 / 3;
+    border-radius: var(--radius-md);
+  }
+
+  .compare-handle-grip {
+    width: 40px;
+    height: 40px;
+  }
+
+  .compare-label {
+    font-size: 0.72rem;
+    padding: 6px 12px;
+    bottom: 12px;
+  }
+
+  .compare-label-before { left: 12px; }
+  .compare-label-after { right: 12px; }
+
+  /* Crew builder */
+  .crew-builder {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+
+  .crew-invite-card {
+    max-width: 300px;
+  }
+
+  .invite-card-logo {
+    font-size: 1.4rem;
+  }
+
+  /* Letter animation mobile */
+  .split-letters .letter {
+    animation-delay: calc(0.5s + var(--i) * 0.04s);
+  }
+}
+
+@media (max-width: 480px) {
+  .hscroll-card {
+    flex: 0 0 85vw;
+    height: 300px;
+  }
+
+  .crew-invite-card {
+    max-width: 260px;
+  }
+
+  .compare-handle-grip {
+    width: 36px;
+    height: 36px;
+  }
+}
+
+/* Reduced motion for new features */
+@media (prefers-reduced-motion: reduce) {
+  .split-letters .letter {
+    opacity: 1 !important;
+    transform: none !important;
+    animation: none !important;
+  }
+
+  .timeline-progress {
+    transition: none !important;
+  }
+
+  .timeline-dot,
+  .timeline-content {
+    transition: none !important;
   }
 }

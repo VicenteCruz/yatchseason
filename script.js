@@ -5,6 +5,23 @@
 
 document.addEventListener('DOMContentLoaded', () => {
 
+  // Lenis smooth scroll
+  const lenis = new Lenis({
+    duration: 1.2,
+    easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+    orientation: 'vertical',
+    gestureOrientation: 'vertical',
+    smoothWheel: true,
+    wheelMultiplier: 1,
+    touchMultiplier: 2,
+  });
+
+  function raf(time) {
+    lenis.raf(time);
+    requestAnimationFrame(raf);
+  }
+  requestAnimationFrame(raf);
+
   const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   const isMobile = window.innerWidth <= 768;
 
@@ -108,9 +125,7 @@ document.addEventListener('DOMContentLoaded', () => {
       const targetId = anchor.getAttribute('href');
       const target = document.querySelector(targetId);
       if (target) {
-        const offset = navbar.offsetHeight;
-        const targetPos = target.getBoundingClientRect().top + window.scrollY - offset;
-        window.scrollTo({ top: targetPos, behavior: 'smooth' });
+        lenis.scrollTo(target, { offset: -navbar.offsetHeight });
 
         if (mobileMenu.classList.contains('open')) closeMobileMenu();
       }
@@ -324,30 +339,73 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================
-  // TIMELINE DRAWING ON SCROLL
+  // HORIZONTAL SCROLL — DESTAQUES
+  // ========================================
+  const hscrollWrapper = document.getElementById('hscrollWrapper');
+  const hscrollTrack = document.getElementById('hscrollTrack');
+
+  if (hscrollWrapper && hscrollTrack && !isMobile) {
+    const updateHorizontalScroll = () => {
+      const wrapperRect = hscrollWrapper.getBoundingClientRect();
+      const wrapperHeight = hscrollWrapper.offsetHeight;
+      const viewportHeight = window.innerHeight;
+      const trackWidth = hscrollTrack.scrollWidth;
+      const viewportWidth = window.innerWidth;
+      const maxScroll = trackWidth - viewportWidth;
+
+      // Calculate how far through the wrapper we've scrolled
+      const scrollStart = wrapperRect.top;
+      const scrollRange = wrapperHeight - viewportHeight;
+      const progress = Math.min(1, Math.max(0, -scrollStart / scrollRange));
+
+      hscrollTrack.style.transform = `translate3d(${-progress * maxScroll}px, 0, 0)`;
+    };
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(updateHorizontalScroll);
+    }, { passive: true });
+  }
+
+  // ========================================
+  // TIMELINE SCROLL PROGRESS
   // ========================================
   const timeline = document.getElementById('timeline');
-  const timelineProgress = document.getElementById('timelineProgress');
-  const timelineItems = document.querySelectorAll('[data-timeline]');
+  const timelineItems = document.querySelectorAll('.timeline-item');
 
-  if (timeline && timelineProgress) {
+  if (timeline && timelineItems.length > 0) {
     const updateTimeline = () => {
       const timelineRect = timeline.getBoundingClientRect();
-      const timelineHeight = timeline.offsetHeight;
-      const viewportTrigger = window.innerHeight * (isMobile ? 0.7 : 0.6);
+      const timelineTop = timelineRect.top;
+      const timelineHeight = timelineRect.height;
+      const viewportMid = window.innerHeight * 0.6;
 
-      const progress = Math.min(1, Math.max(0,
-        (viewportTrigger - timelineRect.top) / timelineHeight
-      ));
+      // Calculate how far the progress bar should fill
+      const scrolled = viewportMid - timelineTop;
+      const progress = Math.max(0, Math.min(1, scrolled / timelineHeight));
+      timeline.style.setProperty('--timeline-progress', (progress * 100) + '%');
 
-      const totalLength = timelineHeight;
-      timelineProgress.style.strokeDasharray = `${totalLength}`;
-      timelineProgress.style.strokeDashoffset = `${totalLength * (1 - progress)}`;
-
-      timelineItems.forEach((item) => {
+      // Activate items that have scrolled past the viewport midpoint
+      let activeIndex = 0;
+      timelineItems.forEach((item, index) => {
         const itemRect = item.getBoundingClientRect();
-        if (itemRect.top < window.innerHeight * 0.8) {
-          item.classList.add('visible');
+        // The dot center is exactly 20px from the top of the timeline-item container
+        const dotCenter = itemRect.top + 20;
+
+        if (dotCenter < viewportMid) {
+          item.classList.add('is-active');
+          activeIndex = index;
+        } else {
+          item.classList.remove('is-active');
+        }
+      });
+
+      // Update background image crossfade
+      const bgImages = document.querySelectorAll('.timeline-bg-image');
+      bgImages.forEach((bg, index) => {
+        if (index === activeIndex) {
+          bg.classList.add('active');
+        } else {
+          bg.classList.remove('active');
         }
       });
     };
@@ -356,8 +414,45 @@ document.addEventListener('DOMContentLoaded', () => {
       requestAnimationFrame(updateTimeline);
     }, { passive: true });
 
+    // Initial update
     updateTimeline();
   }
+
+  // ========================================
+  // BEFORE/AFTER COMPARISON (SCROLL-DRIVEN)
+  // ========================================
+  const compareContainer = document.getElementById('compareContainer');
+  const compareBefore = document.getElementById('compareBefore');
+  const compareHandle = document.getElementById('compareHandle');
+
+  if (compareContainer && compareBefore && compareHandle) {
+    const updateCompareOnScroll = () => {
+      const rect = compareContainer.getBoundingClientRect();
+      const viewportHeight = window.innerHeight;
+
+      const startPoint = viewportHeight * 0.35;
+      const endPoint = viewportHeight * 0.15;
+
+      const scrolled = startPoint - rect.top;
+      const totalDistance = startPoint - endPoint;
+      const progress = Math.max(0, Math.min(1, scrolled / totalDistance));
+
+      const clipPercentage = progress * 100;
+      const handlePosition = 100 - clipPercentage;
+
+      compareBefore.style.clipPath = `inset(0 ${clipPercentage}% 0 0)`;
+      compareHandle.style.left = `${handlePosition}%`;
+    };
+
+    window.addEventListener('scroll', () => {
+      requestAnimationFrame(updateCompareOnScroll);
+    }, { passive: true });
+
+    // Initial update
+    updateCompareOnScroll();
+  }
+
+
 
   // ========================================
   // GALLERY LIGHTBOX + SWIPE GESTURES

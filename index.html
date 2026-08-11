@@ -9,6 +9,7 @@
   <meta property="og:type" content="website">
   <title>Yacht Season — Grécia</title>
   <link rel="stylesheet" href="styles.css">
+  <link rel="preconnect" href="https://unpkg.com">
 </head>
 <body>
 
@@ -81,7 +82,9 @@
       <span class="hero-label">Grécia · Verão 2026</span>
       <h1 class="hero-title">
         <span class="title-line"><span class="title-line-inner">UM DIA NA</span></span>
-        <span class="title-line highlight"><span class="title-line-inner">YACHT SEASON</span></span>
+        <span class="title-line highlight"><span class="title-line-inner split-letters">
+          <span class="letter" style="--i:0">Y</span><span class="letter" style="--i:1">A</span><span class="letter" style="--i:2">C</span><span class="letter" style="--i:3">H</span><span class="letter" style="--i:4">T</span><span class="letter letter-space" style="--i:5">&nbsp;</span><span class="letter" style="--i:6">S</span><span class="letter" style="--i:7">E</span><span class="letter" style="--i:8">A</span><span class="letter" style="--i:9">S</span><span class="letter" style="--i:10">O</span><span class="letter" style="--i:11">N</span>
+        </span></span>
       </h1>
       <p class="hero-subtitle">
         Acordas num catamarã. Mergulhas em águas cristalinas. Velejas entre ilhas paradisíacas. 
@@ -234,34 +237,52 @@
           </div>
         </div>
         <div class="gallery-item reveal-scale" data-index="1" data-tilt-gallery>
-          <img src="img/gallery_2.jpg" alt="Stand Up Paddle" loading="lazy">
-          <div class="gallery-caption">
-            <span>SUP</span>
-          </div>
-        </div>
-        <div class="gallery-item reveal-scale" data-index="2" data-tilt-gallery>
           <img src="img/gallery_3.jpg" alt="Almoço no catamarã" loading="lazy">
           <div class="gallery-caption">
             <span>Almoço</span>
           </div>
         </div>
-        <div class="gallery-item reveal-scale" data-index="3" data-tilt-gallery>
+        <div class="gallery-item reveal-scale" data-index="2" data-tilt-gallery>
           <img src="img/gallery_4.jpg" alt="Baía secreta grega" loading="lazy">
           <div class="gallery-caption">
             <span>Baía Secreta</span>
           </div>
         </div>
-        <div class="gallery-item reveal-scale" data-index="4" data-tilt-gallery>
+        <div class="gallery-item reveal-scale" data-index="3" data-tilt-gallery>
           <img src="img/gallery_5.jpg" alt="Après-Sea nos bares" loading="lazy">
           <div class="gallery-caption">
             <span>Nightlife</span>
           </div>
         </div>
-        <div class="gallery-item reveal-scale" data-index="5" data-tilt-gallery>
+        <div class="gallery-item reveal-scale" data-index="4" data-tilt-gallery>
           <img src="img/gallery_6.jpg" alt="Pôr do sol no catamarã" loading="lazy">
           <div class="gallery-caption">
             <span>Sunset</span>
           </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ============ BEFORE/AFTER COMPARISON ============ -->
+  <section id="compare">
+    <div class="container">
+      <div class="section-header reveal">
+        <span class="section-label">Sente a Diferença</span>
+        <h2>Férias Normais vs Yacht Season</h2>
+        <p>Faz scroll para ver a transformação. Depois decide.</p>
+      </div>
+      <div class="compare-container reveal" id="compareContainer">
+        <div class="compare-image compare-after">
+          <img src="img/compare_after.jpg" alt="Yacht Season — Catamarã em águas cristalinas" loading="lazy">
+          <span class="compare-label compare-label-after">Yacht Season ☀️</span>
+        </div>
+        <div class="compare-image compare-before" id="compareBefore">
+          <img src="img/compare_before.jpg" alt="Férias normais — Praia lotada" loading="lazy">
+          <span class="compare-label compare-label-before">Férias Normais 😴</span>
+        </div>
+        <div class="compare-handle" id="compareHandle">
+          <div class="compare-handle-line"></div>
         </div>
       </div>
     </div>
@@ -345,71 +366,73 @@
     </div>
   </section>
 
-  <!-- ============ DESTAQUES ============ -->
-  <section id="destaques">
-    <div class="container">
-      <div class="section-header reveal">
-        <span class="section-label">O Que Vais Viver</span>
-        <h2>Destaques</h2>
-        <p>Cada dia é único. Cada momento é inesquecível.</p>
-      </div>
+  <!-- ============ DESTAQUES (Horizontal Scroll) ============ -->
+  <section id="destaques" class="destaques-section">
+    <div class="hscroll-wrapper" id="hscrollWrapper">
+      <div class="hscroll-sticky">
+        <div class="container destaques-header-wrapper">
+          <div class="section-header reveal">
+            <span class="section-label">O Que Vais Viver</span>
+            <h2>Destaques</h2>
+            <p>Cada dia é único. Cada momento é inesquecível.</p>
+          </div>
+          <div class="horizontal-text reveal">
+            <div class="horizontal-text-inner">
+              ILHAS SECRETAS — APRÈS-SEA — SUNSETS — STAND UP PADDLE — GASTRONOMIA — FESTAS — MERGULHO — CULTURA —
+            </div>
+          </div>
+        </div>
 
-      <!-- Horizontal scroll text -->
-      <div class="horizontal-text reveal">
-        <div class="horizontal-text-inner">
-          ILHAS SECRETAS — APRÈS-SEA — SUNSETS — STAND UP PADDLE — GASTRONOMIA — FESTAS — MERGULHO — CULTURA —
-        </div>
-      </div>
-
-      <div class="highlights-grid">
-        <div class="highlight-card large reveal" data-tilt-gallery>
-          <div class="card-image">
-            <img src="img/gallery_4.jpg" alt="Ilhas Secretas" loading="lazy">
+        <div class="hscroll-track" id="hscrollTrack">
+          <div class="hscroll-card hscroll-card-large" data-tilt-gallery>
+            <div class="card-image">
+              <img src="img/gallery_4.jpg" alt="Ilhas Secretas" loading="lazy">
+            </div>
+            <span class="card-tag">Exclusivo</span>
+            <div class="card-content">
+              <h3>Ilhas Secretas</h3>
+              <p>Baías paradisíacas onde só chegas de barco</p>
+            </div>
           </div>
-          <span class="card-tag">Exclusivo</span>
-          <div class="card-content">
-            <h3>Ilhas Secretas</h3>
-            <p>Baías paradisíacas onde só chegas de barco</p>
+          <div class="hscroll-card" data-tilt-gallery>
+            <div class="card-image">
+              <img src="img/gallery_5.jpg" alt="Après-Sea" loading="lazy">
+            </div>
+            <span class="card-tag">Nightlife</span>
+            <div class="card-content">
+              <h3>Après-Sea</h3>
+              <p>A vida noturna das ilhas gregas</p>
+            </div>
           </div>
-        </div>
-        <div class="highlight-card reveal" data-tilt-gallery>
-          <div class="card-image">
-            <img src="img/gallery_5.jpg" alt="Après-Sea" loading="lazy">
+          <div class="hscroll-card" data-tilt-gallery>
+            <div class="card-image">
+              <img src="img/gallery_2.jpg" alt="Stand Up Paddle" loading="lazy">
+            </div>
+            <span class="card-tag">Aventura</span>
+            <div class="card-content">
+              <h3>SUP & Mergulho</h3>
+              <p>Atividades no paraíso</p>
+            </div>
           </div>
-          <span class="card-tag">Nightlife</span>
-          <div class="card-content">
-            <h3>Après-Sea</h3>
-            <p>A vida noturna das ilhas gregas</p>
+          <div class="hscroll-card" data-tilt-gallery>
+            <div class="card-image">
+              <img src="img/gallery_3.jpg" alt="Gastronomia" loading="lazy">
+            </div>
+            <span class="card-tag">Food</span>
+            <div class="card-content">
+              <h3>Gastronomia Local</h3>
+              <p>Sabores autênticos do Mediterrâneo</p>
+            </div>
           </div>
-        </div>
-        <div class="highlight-card reveal" data-tilt-gallery>
-          <div class="card-image">
-            <img src="img/gallery_2.jpg" alt="Stand Up Paddle" loading="lazy">
-          </div>
-          <span class="card-tag">Aventura</span>
-          <div class="card-content">
-            <h3>SUP & Mergulho</h3>
-            <p>Atividades no paraíso</p>
-          </div>
-        </div>
-        <div class="highlight-card reveal" data-tilt-gallery>
-          <div class="card-image">
-            <img src="img/gallery_3.jpg" alt="Gastronomia" loading="lazy">
-          </div>
-          <span class="card-tag">Food</span>
-          <div class="card-content">
-            <h3>Gastronomia Local</h3>
-            <p>Sabores autênticos do Mediterrâneo</p>
-          </div>
-        </div>
-        <div class="highlight-card reveal" data-tilt-gallery>
-          <div class="card-image">
-            <img src="img/gallery_6.jpg" alt="Sunsets" loading="lazy">
-          </div>
-          <span class="card-tag">Vibes</span>
-          <div class="card-content">
-            <h3>Sunsets Épicos</h3>
-            <p>Pôr do sol do deck do catamarã</p>
+          <div class="hscroll-card" data-tilt-gallery>
+            <div class="card-image">
+              <img src="img/gallery_6.jpg" alt="Sunsets" loading="lazy">
+            </div>
+            <span class="card-tag">Vibes</span>
+            <div class="card-content">
+              <h3>Sunsets Épicos</h3>
+              <p>Pôr do sol do deck do catamarã</p>
+            </div>
           </div>
         </div>
       </div>
@@ -423,77 +446,116 @@
     </svg>
   </div>
 
-  <!-- ============ ITINERÁRIO ============ -->
+  <!-- ============ ITINERÁRIO (Timeline) ============ -->
   <section id="itinerario" class="section-bg-alt">
+    <!-- Smooth fading backgrounds for each day -->
+    <div class="timeline-bg-wrapper" id="timelineBgWrapper">
+      <div class="timeline-bg-image active" style="background-image: url('img/gallery_1.jpg');"></div>
+      <div class="timeline-bg-image" style="background-image: url('img/gallery_2.jpg');"></div>
+      <div class="timeline-bg-image" style="background-image: url('img/gallery_3.jpg');"></div>
+      <div class="timeline-bg-image" style="background-image: url('img/gallery_4.jpg');"></div>
+      <div class="timeline-bg-image" style="background-image: url('img/gallery_5.jpg');"></div>
+      <div class="timeline-bg-image" style="background-image: url('img/gallery_6.jpg');"></div>
+    </div>
     <div class="container">
       <div class="section-header reveal">
-        <span class="section-label">7 Dias · 7 Ilhas</span>
+        <span class="section-label">7 Dias · 6 Ilhas</span>
         <h2>Itinerário</h2>
-        <p>Cada dia uma nova ilha, um novo paraíso para explorar.</p>
+        <p>A tua semana nas Cíclades, dia a dia.</p>
       </div>
-      <div class="timeline" id="timeline">
-        <!-- SVG drawing line -->
-        <svg class="timeline-svg" id="timelineSvg" preserveAspectRatio="none">
-          <line x1="50%" y1="0" x2="50%" y2="100%" class="timeline-line-bg"/>
-          <line x1="50%" y1="0" x2="50%" y2="100%" class="timeline-line-progress" id="timelineProgress"/>
-        </svg>
 
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
+      <div class="timeline" id="timeline">
+
+        <!-- Day 1 — left -->
+        <div class="timeline-item reveal" data-day="1">
+          <div class="timeline-dot"><span>1</span></div>
           <div class="timeline-content">
-            <div class="timeline-day">Dia 1</div>
-            <h3>Atenas → Marina de Lavrion</h3>
-            <p>Check-in, conhece o grupo e o teu catamarã. Primeiro jantar a bordo e briefing da aventura.</p>
+            <span class="timeline-day">Dia 1</span>
+            <h3 class="timeline-title">Atenas → Marina de Lavrion</h3>
+            <p class="timeline-desc">Check-in, conhece o grupo e o teu catamarã. Primeiro jantar a bordo e briefing da aventura.</p>
+            <div class="timeline-tags">
+              <span>⚓ Check-in</span>
+              <span>🍽️ Jantar</span>
+              <span>👥 Grupo</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
+
+        <!-- Day 2 — right -->
+        <div class="timeline-item tl-right reveal" data-day="2">
+          <div class="timeline-dot"><span>2</span></div>
           <div class="timeline-content">
-            <div class="timeline-day">Dia 2</div>
-            <h3>Kea</h3>
-            <p>Primeira navegação! Baías escondidas, mergulho em águas cristalinas e jantar num restaurante local.</p>
+            <span class="timeline-day">Dia 2</span>
+            <h3 class="timeline-title">Kea</h3>
+            <p class="timeline-desc">Primeira navegação! Baías escondidas, mergulho em águas cristalinas e jantar num restaurante local.</p>
+            <div class="timeline-tags">
+              <span>🤿 Mergulho</span>
+              <span>⛵ Navegação</span>
+              <span>🍷 Jantar</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
+
+        <!-- Day 3 — left -->
+        <div class="timeline-item reveal" data-day="3">
+          <div class="timeline-dot"><span>3</span></div>
           <div class="timeline-content">
-            <div class="timeline-day">Dia 3</div>
-            <h3>Kythnos</h3>
-            <p>Praias desertas e fontes termais naturais. SUP e snorkel na baía de Kolona.</p>
+            <span class="timeline-day">Dia 3</span>
+            <h3 class="timeline-title">Kythnos</h3>
+            <p class="timeline-desc">Praias desertas e fontes termais naturais. SUP e snorkel na baía de Kolona.</p>
+            <div class="timeline-tags">
+              <span>🏖️ Praias</span>
+              <span>♨️ Termas</span>
+              <span>🏄 SUP</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
+
+        <!-- Day 4 — right -->
+        <div class="timeline-item tl-right reveal" data-day="4">
+          <div class="timeline-dot"><span>4</span></div>
           <div class="timeline-content">
-            <div class="timeline-day">Dia 4</div>
-            <h3>Serifos</h3>
-            <p>Vila branca no topo da colina. Almoço no mar, trilho até à Chora e noite nos bares locais.</p>
+            <span class="timeline-day">Dia 4</span>
+            <h3 class="timeline-title">Serifos</h3>
+            <p class="timeline-desc">Vila branca no topo da colina. Almoço no mar, trilho até à Chora e noite nos bares locais.</p>
+            <div class="timeline-tags">
+              <span>🏘️ Chora</span>
+              <span>🥗 Almoço</span>
+              <span>🍹 Bares</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
+
+        <!-- Day 5 — left -->
+        <div class="timeline-item reveal" data-day="5">
+          <div class="timeline-dot"><span>5</span></div>
           <div class="timeline-content">
-            <div class="timeline-day">Dia 5</div>
-            <h3>Sifnos</h3>
-            <p>Ilha da gastronomia! Melhor comida das Cíclades, praias paradisíacas e pôr do sol épico.</p>
+            <span class="timeline-day">Dia 5</span>
+            <h3 class="timeline-title">Sifnos</h3>
+            <p class="timeline-desc">Ilha da gastronomia! Melhor comida das Cíclades, praias paradisíacas e pôr do sol épico.</p>
+            <div class="timeline-tags">
+              <span>🍽️ Gastronomia</span>
+              <span>🌅 Sunset</span>
+              <span>📸 Fotos</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
+
+        <!-- Day 6 — right -->
+        <div class="timeline-item tl-right reveal" data-day="6">
+          <div class="timeline-dot"><span>6</span></div>
           <div class="timeline-content">
-            <div class="timeline-day">Dia 6</div>
-            <h3>Milos</h3>
-            <p>A joia escondida. Sarakiniko, Kleftiko — formações rochosas únicas. Festa de despedida!</p>
+            <span class="timeline-day">Dia 6</span>
+            <h3 class="timeline-title">Milos</h3>
+            <p class="timeline-desc">A joia escondida. Sarakiniko, Kleftiko — formações rochosas únicas. Festa de despedida!</p>
+            <div class="timeline-tags">
+              <span>🪨 Sarakiniko</span>
+              <span>🎉 Festa</span>
+              <span>🏝️ Kleftiko</span>
+            </div>
           </div>
         </div>
-        <div class="timeline-item" data-timeline>
-          <div class="timeline-dot"></div>
-          <div class="timeline-content">
-            <div class="timeline-day">Dia 7</div>
-            <h3>Regresso a Atenas</h3>
-            <p>Último mergulho matinal, navegação de regresso. Até à próxima Yacht Season!</p>
-          </div>
-        </div>
+
       </div>
     </div>
   </section>
@@ -548,6 +610,8 @@
       </div>
     </div>
   </section>
+
+
 
   <!-- Wave Divider -->
   <div class="wave-divider">
@@ -739,6 +803,7 @@
     </div>
   </div>
 
+  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js"></script>
   <script src="script.js"></script>
 </body>
 </html>
