@@ -14,6 +14,10 @@
     --nav-height: 60px;
   }
 
+  section {
+    overflow-x: hidden;
+  }
+
   /* — Cursor — */
   .cursor-dot, .cursor-ring { display: none; }
   body, a, button, .btn, .gallery-item, .lightbox, .lightbox-close, .lightbox-nav { cursor: auto; }
