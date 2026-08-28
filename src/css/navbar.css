@@ -131,7 +131,7 @@
   pointer-events: all;
 }
 
-.mobile-menu a {
+.mobile-menu-link:not(.btn) {
   font-family: var(--font-heading);
   font-size: 1.6rem;
   font-weight: 600;
@@ -139,5 +139,5 @@
   transition: color var(--transition);
 }
 
-.mobile-menu a:hover { color: var(--color-primary-dark); }
+.mobile-menu-link:not(.btn):hover { color: var(--color-primary-dark); }
 
