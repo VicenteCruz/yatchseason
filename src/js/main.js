@@ -1,5 +1,5 @@
 /* ============================================
-   YACHT SEASON — Interactions & WOW Animations
+   YACHT SEASON â€” Interactions & WOW Animations
    Mobile-First Premium Experience
    ============================================ */
 
@@ -51,7 +51,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
     animateRing();
 
-    const hoverTargets = document.querySelectorAll('a, button, .btn, .magnetic, .nav-links a, .footer-social a');
+    const hoverTargets = document.querySelectorAll('a, button, .btn, .magnetic, .nav-links a, .footer-social a, .destino-card');
     hoverTargets.forEach(el => {
       el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
       el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
@@ -339,7 +339,7 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================
-  // HORIZONTAL SCROLL — DESTAQUES
+  // HORIZONTAL SCROLL â€” DESTAQUES
   // ========================================
   const hscrollWrapper = document.getElementById('hscrollWrapper');
   const hscrollTrack = document.getElementById('hscrollTrack');
@@ -367,56 +367,67 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================
-  // TIMELINE SCROLL PROGRESS
+      // TIMELINE SCROLL PROGRESS
   // ========================================
-  const timeline = document.getElementById('timeline');
-  const timelineItems = document.querySelectorAll('.timeline-item');
+  const updateTimeline = () => {
+    // Find the currently visible timeline
+    const isCroatia = document.body.classList.contains('theme-croacia');
+    const activeTimeline = document.getElementById(isCroatia ? 'timeline-croacia' : 'timeline');
+    
+    if (!activeTimeline) return;
 
-  if (timeline && timelineItems.length > 0) {
-    const updateTimeline = () => {
-      const timelineRect = timeline.getBoundingClientRect();
-      const timelineTop = timelineRect.top;
-      const timelineHeight = timelineRect.height;
-      const viewportMid = window.innerHeight * 0.6;
+    // Get items only from the active timeline
+    const timelineItems = activeTimeline.querySelectorAll('.timeline-item');
+    if (timelineItems.length === 0) return;
 
-      // Calculate how far the progress bar should fill
-      const scrolled = viewportMid - timelineTop;
-      const progress = Math.max(0, Math.min(1, scrolled / timelineHeight));
-      timeline.style.setProperty('--timeline-progress', (progress * 100) + '%');
+    const timelineRect = activeTimeline.getBoundingClientRect();
+    const timelineTop = timelineRect.top;
+    const timelineHeight = timelineRect.height;
+    const viewportMid = window.innerHeight * 0.6;
 
-      // Activate items that have scrolled past the viewport midpoint
-      let activeIndex = 0;
-      timelineItems.forEach((item, index) => {
-        const itemRect = item.getBoundingClientRect();
-        // The dot center is exactly 20px from the top of the timeline-item container
-        const dotCenter = itemRect.top + 20;
+    // Calculate how far the progress bar should fill
+    const scrolled = viewportMid - timelineTop;
+    const progress = Math.max(0, Math.min(1, scrolled / timelineHeight));
+    activeTimeline.style.setProperty('--timeline-progress', (progress * 100) + '%');
 
-        if (dotCenter < viewportMid) {
-          item.classList.add('is-active');
-          activeIndex = index;
-        } else {
-          item.classList.remove('is-active');
-        }
-      });
+    // Activate items that have scrolled past the viewport midpoint
+    let activeIndex = 0;
+    timelineItems.forEach((item, index) => {
+      const itemRect = item.getBoundingClientRect();
+      const dotCenter = itemRect.top + 20;
 
-      // Update background image crossfade
-      const bgImages = document.querySelectorAll('.timeline-bg-image');
-      bgImages.forEach((bg, index) => {
-        if (index === activeIndex) {
-          bg.classList.add('active');
-        } else {
-          bg.classList.remove('active');
-        }
-      });
-    };
+      if (dotCenter < viewportMid) {
+        item.classList.add('is-active');
+        activeIndex = index;
+      } else {
+        item.classList.remove('is-active');
+      }
+    });
 
-    window.addEventListener('scroll', () => {
-      requestAnimationFrame(updateTimeline);
-    }, { passive: true });
+    // Update background image crossfade
+    const bgImages = document.querySelectorAll('.timeline-bg-image');
+    bgImages.forEach((bg, index) => {
+      if (index === activeIndex) {
+        bg.classList.add('active');
+      } else {
+        bg.classList.remove('active');
+      }
+    });
+  };
 
-    // Initial update
-    updateTimeline();
-  }
+  window.addEventListener('scroll', () => {
+    requestAnimationFrame(updateTimeline);
+  }, { passive: true });
+
+  // Initial update
+  updateTimeline();
+
+  // Also update when clicking to swap themes
+  document.addEventListener('click', (e) => {
+    if (e.target.closest('#card-grecia') || e.target.closest('#card-croacia') || e.target.closest('#tab-grecia') || e.target.closest('#tab-croacia')) {
+      setTimeout(() => requestAnimationFrame(updateTimeline), 50);
+    }
+  });
 
   // ========================================
   // BEFORE/AFTER COMPARISON (SCROLL-DRIVEN)
@@ -766,4 +777,54 @@ document.addEventListener('DOMContentLoaded', () => {
     setInterval(updateCountdown, 1000);
   }
 
+  // ========================================
+  // PRICING ANIMATION TRIGGER
+  // ========================================
+  const priceWrapper = document.querySelector('.price-promo-wrapper');
+  if (priceWrapper) {
+    const pricingObserver = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+        }
+      });
+    }, { threshold: 0.5 });
+    pricingObserver.observe(priceWrapper);
+  }
+
+  // ========================================
+  // DESTINOS & ITINERARIO THEME TOGGLE
+  // ========================================
+  const cardGrecia = document.getElementById('card-grecia');
+  const cardCroacia = document.getElementById('card-croacia');
+  const tabGrecia = document.getElementById('tab-grecia');
+  const tabCroacia = document.getElementById('tab-croacia');
+
+  const setGrecia = () => {
+    document.body.classList.remove('theme-croacia');
+    if (document.getElementById('itinerario-subtitle')) document.getElementById('itinerario-subtitle').innerText = 'A tua semana nas Cíclades, dia a dia.';
+    if (tabGrecia && tabCroacia) {
+      tabGrecia.classList.add('active');
+      tabCroacia.classList.remove('active');
+    }
+  };
+
+  const setCroacia = () => {
+    document.body.classList.add('theme-croacia');
+    if (document.getElementById('itinerario-subtitle')) document.getElementById('itinerario-subtitle').innerText = 'A tua semana na Dalmácia, dia a dia.';
+    if (tabGrecia && tabCroacia) {
+      tabCroacia.classList.add('active');
+      tabGrecia.classList.remove('active');
+    }
+  };
+
+  if (cardGrecia) cardGrecia.addEventListener('click', setGrecia);
+  if (cardCroacia) cardCroacia.addEventListener('click', setCroacia);
+  if (tabGrecia) tabGrecia.addEventListener('click', setGrecia);
+  if (tabCroacia) tabCroacia.addEventListener('click', setCroacia);
+
 });
+
+
+
+

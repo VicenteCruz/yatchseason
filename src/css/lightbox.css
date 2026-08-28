@@ -1,0 +1,72 @@
+/* ============================================
+   LIGHTBOX MOBILE ENHANCEMENTS
+   ============================================ */
+.lightbox-swipe-hint {
+  display: none;
+  position: absolute;
+  bottom: 80px;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.4s;
+}
+
+.lightbox-swipe-hint span {
+  font-family: var(--font-heading);
+  font-size: 0.75rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.4);
+}
+
+.lightbox-counter {
+  display: none;
+  position: absolute;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: var(--font-heading);
+  font-size: 0.8rem;
+  font-weight: 500;
+  letter-spacing: 2px;
+  color: rgba(255, 255, 255, 0.5);
+}
+
+/* ============================================
+   TOUCH FEEDBACK (all interactive elements)
+   ============================================ */
+@media (hover: none) and (pointer: coarse) {
+  .btn:active {
+    transform: scale(0.96) !important;
+    transition: transform 0.1s !important;
+  }
+
+  .step-card:active,
+  .spec-item:active,
+  .highlight-card:active,
+  .timeline-content:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s !important;
+  }
+
+  .gallery-item:active img {
+    transform: scale(1.03);
+  }
+
+  .pricing-card:active {
+    transform: scale(0.98) !important;
+    transition: transform 0.1s !important;
+  }
+
+  .footer-social a:active {
+    transform: scale(0.9) translateY(0) !important;
+  }
+
+  /* Remove hover-only effects on touch */
+  .gallery-caption {
+    transform: translateY(0);
+    background: linear-gradient(0deg, rgba(0,0,0,0.4) 0%, transparent 60%);
+  }
+}
+

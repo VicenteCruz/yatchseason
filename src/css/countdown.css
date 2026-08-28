@@ -1,0 +1,146 @@
+/* ============================================
+   FLOATING COUNTDOWN
+   ============================================ */
+.floating-countdown {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  background: rgba(255, 255, 255, 0.5);
+  backdrop-filter: blur(28px) saturate(160%);
+  -webkit-backdrop-filter: blur(28px) saturate(160%);
+  border: 1px solid rgba(255, 255, 255, 0.7);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1), inset 0 2px 10px rgba(255, 255, 255, 0.8);
+  border-radius: var(--radius-full);
+  padding: 12px 24px 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  z-index: 998;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: all 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  cursor: none;
+  overflow: hidden;
+}
+
+
+
+.floating-countdown.visible {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.countdown-icon {
+  width: 40px;
+  height: 40px;
+  background: var(--color-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  color: var(--color-black);
+  animation: pulse-icon 2s infinite;
+}
+
+.countdown-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: var(--color-black);
+  display: block;
+}
+
+@keyframes pulse-icon {
+  0% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary) 70%, transparent); }
+  70% { box-shadow: 0 0 0 10px color-mix(in srgb, var(--color-primary) 0%, transparent); }
+  100% { box-shadow: 0 0 0 0 color-mix(in srgb, var(--color-primary) 0%, transparent); }
+}
+
+.countdown-text {
+  display: flex;
+  flex-direction: column;
+  max-width: 250px;
+  min-width: 0;
+  opacity: 1;
+  transition: max-width 0.6s cubic-bezier(0.34, 1.56, 0.64, 1), opacity 0.4s ease;
+  white-space: nowrap;
+}
+
+
+
+.countdown-title {
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  color: var(--color-text-light);
+}
+
+.countdown-timer {
+  font-family: var(--font-heading);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--color-black);
+}
+
+@media (max-width: 768px) {
+  .floating-countdown {
+    top: 80px;
+    bottom: auto;
+    right: 16px;
+    padding: 8px 16px 8px 10px;
+    gap: 12px;
+  }
+  .floating-countdown.collapsed {
+    padding: 8px;
+    gap: 0;
+  }
+  .floating-countdown.collapsed:hover {
+    padding: 8px 16px 8px 10px;
+    gap: 12px;
+  }
+  .floating-countdown.collapsed .countdown-text {
+    max-width: 0;
+    opacity: 0;
+    pointer-events: none;
+  }
+  .floating-countdown.collapsed:hover .countdown-text {
+    max-width: 250px;
+    opacity: 1;
+  }
+  .countdown-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 1rem;
+  }
+  .countdown-icon svg {
+    width: 16px;
+    height: 16px;
+  }
+  .countdown-title {
+    font-size: 0.65rem;
+  }
+  .countdown-timer {
+    font-size: 0.95rem;
+  }
+}
+
+/* ============================================
+   LENIS SMOOTH SCROLL
+   ============================================ */
+html.lenis, html.lenis body {
+  height: auto;
+}
+
+.lenis.lenis-smooth {
+  scroll-behavior: auto !important;
+}
+
+.lenis.lenis-smooth [data-lenis-prevent] {
+  overscroll-behavior: contain;
+}
+
+.lenis.lenis-stopped {
+  overflow: hidden;
+}
+

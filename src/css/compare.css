@@ -1,0 +1,345 @@
+/* ============================================
+   BEFORE/AFTER COMPARISON SLIDER
+   ============================================ */
+.compare-container {
+  position: relative;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  box-shadow: var(--shadow-card);
+  user-select: none;
+  -webkit-user-select: none;
+}
+
+.compare-image {
+  position: absolute;
+  inset: 0;
+}
+
+.compare-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  pointer-events: none;
+}
+
+.compare-before {
+  z-index: 2;
+  clip-path: inset(0 0% 0 0);
+  will-change: clip-path;
+}
+
+.compare-after {
+  z-index: 1;
+}
+
+.compare-handle {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 100%;
+  width: 4px;
+  z-index: 3;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  transform: translateX(-50%);
+  pointer-events: none;
+  will-change: left;
+}
+
+.compare-handle-line {
+  width: 2px;
+  height: 100%;
+  background: white;
+  box-shadow: 0 0 12px rgba(0,0,0,0.35);
+}
+
+.compare-label {
+  position: absolute;
+  bottom: 20px;
+  font-family: var(--font-heading);
+  font-size: 0.85rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  padding: 8px 18px;
+  border-radius: var(--radius-full);
+  z-index: 4;
+  pointer-events: none;
+}
+
+.compare-label-before {
+  left: 20px;
+  background: rgba(0,0,0,0.6);
+  color: white;
+  backdrop-filter: blur(8px);
+}
+
+.compare-label-after {
+  right: 20px;
+  background: var(--color-primary);
+  color: var(--color-black);
+}
+
+/* ============================================
+   TIMELINE ITINERARY
+   ============================================ */
+#itinerario {
+  position: relative;
+  overflow: hidden;
+}
+
+/* Background Wrapper */
+.timeline-bg-wrapper {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.timeline-bg-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0;
+  transition: opacity 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  filter: saturate(0.85) contrast(0.95);
+}
+
+.timeline-bg-image.active {
+  opacity: 0.12; /* Subtle watermark opacity to blend with the cream background */
+}
+
+/* Overlay to blend and soften the backgrounds */
+.timeline-bg-wrapper::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle, rgba(242, 241, 236, 0.3) 0%, rgba(242, 241, 236, 0.85) 100%);
+  pointer-events: none;
+}
+
+#itinerario .container {
+  position: relative;
+  z-index: 2;
+}
+
+.timeline {
+  position: relative;
+  padding: 20px 0 0;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+/* Vertical track — ::before pseudo-element */
+.timeline::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: var(--color-border);
+  transform: translateX(-50%);
+}
+
+/* Scroll-driven progress overlay */
+.timeline::after {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  width: 2px;
+  height: var(--timeline-progress, 0%);
+  background: linear-gradient(180deg, var(--color-primary) 0%, var(--color-secondary) 100%);
+  transform: translateX(-50%);
+  transition: height 0.15s linear;
+  will-change: height;
+  z-index: 1;
+}
+
+/* Default: content on the LEFT side */
+.timeline-item {
+  position: relative;
+  z-index: 2;
+  padding: 0 calc(50% + 28px) 56px 0;
+}
+
+/* Right-side items */
+.timeline-item.tl-right {
+  padding: 0 0 56px calc(50% + 28px);
+}
+
+.timeline-item:last-child {
+  padding-bottom: 0;
+}
+
+/* The numbered dot — always on the center line */
+.timeline-dot {
+  position: absolute;
+  left: 50%;
+  top: 6px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: var(--color-white);
+  border: 2px solid var(--color-border);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 3;
+  transform: translateX(-50%);
+  transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.timeline-dot span {
+  font-family: var(--font-heading);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-text-muted);
+  transition: color 0.3s;
+  line-height: 1;
+}
+
+/* Active state */
+.timeline-item.is-active .timeline-dot {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  transform: translateX(-50%) scale(1.15);
+  box-shadow: 0 0 0 5px color-mix(in srgb, var(--color-primary) 18%, transparent);
+}
+
+.timeline-item.is-active .timeline-dot span {
+  color: var(--color-black);
+}
+
+/* Content card */
+.timeline-content {
+  text-align: left;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(20px) saturate(150%);
+  -webkit-backdrop-filter: blur(20px) saturate(150%);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  border-radius: var(--radius-md);
+  padding: 24px 28px;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              box-shadow 0.35s cubic-bezier(0.22, 1, 0.36, 1),
+              border-color 0.35s ease;
+}
+
+.timeline-item.is-active .timeline-content {
+  border-color: color-mix(in srgb, var(--color-primary) 30%, transparent);
+  box-shadow: 0 4px 24px rgba(0, 0, 0, 0.05);
+}
+
+/* Day label */
+.timeline-day {
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+  color: var(--color-secondary);
+  display: block;
+  margin-bottom: 6px;
+}
+
+.timeline-item.is-active .timeline-day {
+  color: var(--color-primary-dark);
+}
+
+/* Title */
+.timeline-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: var(--color-text);
+  margin-bottom: 8px;
+  line-height: 1.3;
+}
+
+/* Description */
+.timeline-desc {
+  font-size: 0.9rem;
+  color: var(--color-text-light);
+  line-height: 1.65;
+  margin-bottom: 14px;
+}
+
+/* Tags */
+.timeline-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.timeline-tags span {
+  font-family: var(--font-heading);
+  font-size: 0.68rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  padding: 4px 10px;
+  background: var(--color-bg-alt);
+  border-radius: var(--radius-full);
+  color: var(--color-text-light);
+  transition: background 0.3s, color 0.3s;
+}
+
+.timeline-item.is-active .timeline-tags span {
+  background: color-mix(in srgb, var(--color-primary) 12%, transparent);
+  color: var(--color-primary-dark);
+}
+
+/* Mobile: single column, line on the left */
+@media (max-width: 768px) {
+  .timeline {
+    max-width: 100%;
+  }
+
+  .timeline::before,
+  .timeline::after {
+    left: 16px;
+    transform: none;
+  }
+
+  .timeline-item,
+  .timeline-item.tl-right {
+    padding: 0 0 32px 48px;
+  }
+
+  .timeline-dot {
+    left: 4px;
+    top: 4px;
+    width: 24px;
+    height: 24px;
+    transform: none;
+  }
+
+  .timeline-item.is-active .timeline-dot {
+    transform: scale(1.15);
+  }
+
+  .timeline-content {
+    padding: 20px 22px;
+  }
+
+  .timeline-title {
+    font-size: 1.05rem;
+  }
+
+  .timeline-desc {
+    font-size: 0.85rem;
+  }
+}
+
+
+
+
+

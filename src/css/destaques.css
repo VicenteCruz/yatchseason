@@ -1,0 +1,195 @@
+/* ============================================
+   DESTAQUES
+   ============================================ */
+.highlights-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 16px;
+}
+
+.highlight-card {
+  background: var(--color-white);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  transition: transform var(--transition), box-shadow var(--transition);
+  transform-style: preserve-3d;
+}
+
+.highlight-card:hover {
+  transform: translateY(-4px);
+  box-shadow: var(--shadow-hover);
+}
+
+.highlight-card.large { grid-column: span 2; grid-row: span 2; }
+
+.highlight-card .card-image {
+  width: 100%;
+  height: 100%;
+  min-height: 220px;
+  overflow: hidden;
+}
+
+.highlight-card.large .card-image { min-height: 100%; }
+
+.highlight-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.highlight-card:hover .card-image img { transform: scale(1.06); }
+
+.highlight-card .card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 24px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.65) 0%, transparent 100%);
+  color: white;
+}
+
+.highlight-card .card-content h3 { color: white; font-size: 1.3rem; margin-bottom: 4px; }
+.highlight-card .card-content p { color: rgba(255,255,255,0.8); font-size: 0.9rem; }
+
+.highlight-card .card-tag {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+}
+
+/* ============================================
+   HORIZONTAL SCROLL — DESTAQUES
+   ============================================ */
+.destaques-section {
+  padding: 0;
+  position: relative;
+}
+
+.destaques-header-wrapper {
+  width: 100%;
+  flex-shrink: 0;
+}
+
+.destaques-header-wrapper .section-header {
+  margin-bottom: 20px;
+}
+
+.destaques-header-wrapper .horizontal-text {
+  margin-bottom: 20px;
+}
+
+.hscroll-wrapper {
+  position: relative;
+  height: 160vh;
+}
+
+.hscroll-sticky {
+  position: sticky;
+  top: 0;
+  height: 100vh;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 30px 0;
+}
+
+.hscroll-track {
+  display: flex;
+  gap: 24px;
+  padding: 0 60px;
+  will-change: transform;
+  transition: none;
+  flex-shrink: 0;
+}
+
+.hscroll-card {
+  flex: 0 0 380px;
+  height: 420px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease, box-shadow 0.4s ease;
+}
+
+.hscroll-card-large {
+  flex: 0 0 540px;
+}
+
+.hscroll-card:hover {
+  transform: translateY(-8px) scale(1.02);
+  box-shadow: var(--shadow-hover);
+}
+
+.hscroll-card .card-image {
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+
+.hscroll-card .card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 0.6s ease;
+}
+
+.hscroll-card:hover .card-image img {
+  transform: scale(1.08);
+}
+
+.hscroll-card .card-content {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 28px;
+  background: linear-gradient(0deg, rgba(0,0,0,0.7) 0%, rgba(0,0,0,0.1) 60%, transparent 100%);
+  color: white;
+}
+
+.hscroll-card .card-content h3 {
+  color: white;
+  font-size: 1.5rem;
+  margin-bottom: 6px;
+}
+
+.hscroll-card .card-content p {
+  color: rgba(255,255,255,0.8);
+  font-size: 0.95rem;
+}
+
+.hscroll-card .card-tag {
+  position: absolute;
+  top: 20px;
+  left: 20px;
+  background: var(--color-primary);
+  color: var(--color-black);
+  font-family: var(--font-heading);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  z-index: 2;
+}
+
+#galeria {
+  padding-bottom: 40px;
+}
+
