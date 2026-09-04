@@ -1,4 +1,4 @@
-﻿/* ============================================
+/* ============================================
    YACHT SEASON � Design System & Styles
    Light Mediterranean Minimalist + WOW
    ============================================ */
@@ -78,14 +78,13 @@ body {
   line-height: 1.6;
   overflow-x: hidden;
   max-width: 100%;
-  cursor: none;
   transition: --color-primary 1.2s cubic-bezier(0.33, 1, 0.68, 1), --color-primary-dark 1.2s cubic-bezier(0.33, 1, 0.68, 1);
 }
 
 img { max-width: 100%; height: auto; display: block; }
-a { text-decoration: none; color: inherit; transition: color var(--transition); cursor: none; }
+a { text-decoration: none; color: inherit; transition: color var(--transition); }
 ul, ol { list-style: none; }
-button { cursor: none; }
+button { }
 
 /* --- Typography --- */
 h1, h2, h3, h4, h5, h6 {
@@ -151,7 +150,6 @@ section {
   padding: 14px 32px;
   border-radius: var(--radius-full);
   border: 2px solid transparent;
-  cursor: none;
   transition: all var(--transition);
   white-space: nowrap;
   position: relative;

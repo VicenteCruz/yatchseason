@@ -22,31 +22,47 @@ document.addEventListener('DOMContentLoaded', () => {
   }
   requestAnimationFrame(raf);
 
-  const isTouchDevice = 'ontouchstart' in window || navigator.maxTouchPoints > 0;
   const isMobile = window.innerWidth <= 768;
 
   // ========================================
-  // CUSTOM CURSOR (desktop only)
+  // CUSTOM CURSOR
   // ========================================
   const cursorDot = document.getElementById('cursorDot');
   const cursorRing = document.getElementById('cursorRing');
 
-  if (!isTouchDevice && cursorDot && cursorRing) {
-    let mouseX = 0, mouseY = 0;
-    let ringX = 0, ringY = 0;
+  if (cursorDot && cursorRing) {
+    let mouseX = -100, mouseY = -100;
+    let ringX = -100, ringY = -100;
+    let cursorVisible = false;
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
       mouseY = e.clientY;
       cursorDot.style.left = mouseX + 'px';
       cursorDot.style.top = mouseY + 'px';
+
+      if (!cursorVisible) {
+        cursorVisible = true;
+        cursorDot.classList.add('cursor-visible');
+        cursorRing.classList.add('cursor-visible');
+        ringX = mouseX;
+        ringY = mouseY;
+      }
+    });
+
+    document.addEventListener('mouseleave', () => {
+      cursorVisible = false;
+      cursorDot.classList.remove('cursor-visible');
+      cursorRing.classList.remove('cursor-visible');
     });
 
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
-      cursorRing.style.left = ringX + 'px';
-      cursorRing.style.top = ringY + 'px';
+      if (cursorVisible) {
+        ringX += (mouseX - ringX) * 0.12;
+        ringY += (mouseY - ringY) * 0.12;
+        cursorRing.style.left = ringX + 'px';
+        cursorRing.style.top = ringY + 'px';
+      }
       requestAnimationFrame(animateRing);
     }
     animateRing();
@@ -243,8 +259,8 @@ document.addEventListener('DOMContentLoaded', () => {
   const heroShapes = document.getElementById('heroShapes');
   const shapes = heroShapes ? heroShapes.querySelectorAll('.shape') : [];
 
-  // Mouse parallax for shapes (desktop)
-  if (heroShapes && !isTouchDevice) {
+  // Mouse parallax for shapes
+  if (heroShapes) {
     document.addEventListener('mousemove', (e) => {
       const centerX = window.innerWidth / 2;
       const centerY = window.innerHeight / 2;
@@ -283,60 +299,56 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // ========================================
-  // 3D TILT EFFECT (desktop only)
+  // 3D TILT EFFECT
   // ========================================
-  if (!isTouchDevice) {
-    const tiltElements = document.querySelectorAll('[data-tilt]');
+  const tiltElements = document.querySelectorAll('[data-tilt]');
 
-    tiltElements.forEach(el => {
-      el.addEventListener('mousemove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -1.5;
-        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 1.5;
-        el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
-      });
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
-        el.style.transition = 'transform 0.5s ease';
-      });
-      el.addEventListener('mouseenter', () => { el.style.transition = 'transform 0.15s ease'; });
+  tiltElements.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -1.5;
+      const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 1.5;
+      el.style.transform = `perspective(800px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) scale(1.01)`;
     });
-
-    const tiltGallery = document.querySelectorAll('[data-tilt-gallery]');
-
-    tiltGallery.forEach(el => {
-      el.addEventListener('mousemove', (e) => {
-        const rect = el.getBoundingClientRect();
-        const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -1.2;
-        const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 1.2;
-        el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
-      });
-      el.addEventListener('mouseleave', () => {
-        el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
-        el.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      });
-      el.addEventListener('mouseenter', () => { el.style.transition = 'transform 0.15s ease'; });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'perspective(800px) rotateX(0) rotateY(0) scale(1)';
+      el.style.transition = 'transform 0.5s ease';
     });
-  }
+    el.addEventListener('mouseenter', () => { el.style.transition = 'transform 0.15s ease'; });
+  });
+
+  const tiltGallery = document.querySelectorAll('[data-tilt-gallery]');
+
+  tiltGallery.forEach(el => {
+    el.addEventListener('mousemove', (e) => {
+      const rect = el.getBoundingClientRect();
+      const rotateX = ((e.clientY - rect.top - rect.height / 2) / (rect.height / 2)) * -1.2;
+      const rotateY = ((e.clientX - rect.left - rect.width / 2) / (rect.width / 2)) * 1.2;
+      el.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
+    });
+    el.addEventListener('mouseleave', () => {
+      el.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
+      el.style.transition = 'transform 0.6s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    });
+    el.addEventListener('mouseenter', () => { el.style.transition = 'transform 0.15s ease'; });
+  });
 
   // ========================================
-  // MAGNETIC BUTTONS (desktop only)
+  // MAGNETIC BUTTONS
   // ========================================
-  if (!isTouchDevice) {
-    document.querySelectorAll('.magnetic').forEach(btn => {
-      btn.addEventListener('mousemove', (e) => {
-        const rect = btn.getBoundingClientRect();
-        const x = e.clientX - rect.left - rect.width / 2;
-        const y = e.clientY - rect.top - rect.height / 2;
-        btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
-      });
-      btn.addEventListener('mouseleave', () => {
-        btn.style.transform = 'translate(0, 0)';
-        btn.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
-      });
-      btn.addEventListener('mouseenter', () => { btn.style.transition = 'transform 0.1s ease'; });
+  document.querySelectorAll('.magnetic').forEach(btn => {
+    btn.addEventListener('mousemove', (e) => {
+      const rect = btn.getBoundingClientRect();
+      const x = e.clientX - rect.left - rect.width / 2;
+      const y = e.clientY - rect.top - rect.height / 2;
+      btn.style.transform = `translate(${x * 0.08}px, ${y * 0.08}px)`;
     });
-  }
+    btn.addEventListener('mouseleave', () => {
+      btn.style.transform = 'translate(0, 0)';
+      btn.style.transition = 'transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1)';
+    });
+    btn.addEventListener('mouseenter', () => { btn.style.transition = 'transform 0.1s ease'; });
+  });
 
   // ========================================
   // HORIZONTAL SCROLL â€” DESTAQUES
@@ -556,7 +568,7 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================
   // TOUCH SWIPE FOR LIGHTBOX
   // ========================================
-  if (isTouchDevice) {
+  if (lightbox && lightboxImg) {
     let touchStartX = 0;
     let touchStartY = 0;
     let touchMoveX = 0;
@@ -670,26 +682,24 @@ document.addEventListener('DOMContentLoaded', () => {
   // ========================================
   // MOBILE: HAPTIC GALLERY SCROLL FEEDBACK
   // ========================================
-  if (isTouchDevice) {
-    const galleryGrid = document.querySelector('.gallery-grid');
-    if (galleryGrid) {
-      let lastSnappedIndex = -1;
+  const galleryGrid = document.querySelector('.gallery-grid');
+  if (galleryGrid && 'vibrate' in navigator) {
+    let lastSnappedIndex = -1;
 
-      galleryGrid.addEventListener('scroll', () => {
-        const scrollLeft = galleryGrid.scrollLeft;
-        const itemWidth = galleryGrid.querySelector('.gallery-item')?.offsetWidth || 1;
-        const gap = 12;
-        const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
+    galleryGrid.addEventListener('scroll', () => {
+      const scrollLeft = galleryGrid.scrollLeft;
+      const itemWidth = galleryGrid.querySelector('.gallery-item')?.offsetWidth || 1;
+      const gap = 12;
+      const currentIndex = Math.round(scrollLeft / (itemWidth + gap));
 
-        if (currentIndex !== lastSnappedIndex) {
-          lastSnappedIndex = currentIndex;
-          // Subtle vibration on snap (if supported)
-          if (navigator.vibrate) {
-            navigator.vibrate(5);
-          }
+      if (currentIndex !== lastSnappedIndex) {
+        lastSnappedIndex = currentIndex;
+        // Subtle vibration on snap (if supported)
+        if (navigator.vibrate) {
+          navigator.vibrate(5);
         }
-      }, { passive: true });
-    }
+      }
+    }, { passive: true });
   }
 
   // ========================================
